@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public abstract class Human : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public abstract class Human : MonoBehaviour
 
     public Animator Anim;
 
+
+    public abstract void AnimPositon();
     public HumanState HumanState
     {
         get
@@ -45,6 +48,18 @@ public abstract class Human : MonoBehaviour
     {
         
     }
+    private void OnEnable()
+    {
+        PlayerController.WalkActon += WalkStatus;
+        PlayerController.IdleAction += IdleStatus;
+    }
+
+
+    private void OnDisable()
+    {
+        PlayerController.WalkActon -= WalkStatus;
+        PlayerController.IdleAction -= IdleStatus;
+    }
 
     // Update is called once per frame
     void Update()
@@ -59,5 +74,13 @@ public abstract class Human : MonoBehaviour
     internal void AssigmentComponent()
     {
         Anim = GetComponent<Animator>();
+    }
+    internal void WalkStatus()
+    {
+        HumanState = HumanState.WALK;
+    }
+    internal void IdleStatus()
+    {
+        HumanState = HumanState.IDLE;
     }
 }

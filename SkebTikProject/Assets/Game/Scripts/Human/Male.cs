@@ -13,8 +13,20 @@ public class Male : Human
     // Update is called once per frame
     void Update()
     {
-        
     }
 
-    
+    public override void AnimPositon()
+    {
+        switch (HumanState)
+        {
+            case HumanState.IDLE:
+                break;
+            case HumanState.WALK:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

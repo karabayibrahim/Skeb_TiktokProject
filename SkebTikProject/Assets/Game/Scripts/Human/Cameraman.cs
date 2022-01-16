@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cameraman : Human
 {
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,18 @@ public class Cameraman : Human
     void Update()
     {
         
+    }
+
+    public override void AnimPositon()
+    {
+        switch (HumanState)
+        {
+            case HumanState.IDLE:
+                break;
+            case HumanState.WALK:
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -15,4 +15,16 @@ public class Female : Human
     {
         
     }
+    public override void AnimPositon()
+    {
+        switch (HumanState)
+        {
+            case HumanState.IDLE:
+                break;
+            case HumanState.WALK:
+                break;
+            default:
+                break;
+        }
+    }
 }
