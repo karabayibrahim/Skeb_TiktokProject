@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             WalkActon?.Invoke();
         }
-        else if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             HorizontalMovement();
         }
