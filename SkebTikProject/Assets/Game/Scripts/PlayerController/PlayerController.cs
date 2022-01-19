@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float HorizontalSpeed;
     public static Action WalkActon;
     public static Action IdleAction;
+    public Transform Cameraman;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +37,20 @@ public class PlayerController : MonoBehaviour
         {
             IdleAction?.Invoke();
         }
-        
+
+    }
+
+    private void FixedUpdate()
+    {
+       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<ICollectable>()!=null)
+        {
+            other.GetComponent<ICollectable>().DoCollect(other.gameObject.GetComponent<ICollectable>().MyIndex);
+        }
     }
 
     private void HorizontalMovement()
