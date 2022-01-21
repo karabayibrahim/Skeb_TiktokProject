@@ -7,6 +7,7 @@ using System;
 public class Cameraman : Human
 {
     private int _targetGateIndex = 0;
+    private Transform Target;
 
     public NavMeshAgent Agent;
     public bool XMoveControl = false;
@@ -36,6 +37,7 @@ public class Cameraman : Human
         PlayerController.WalkActon += CameramanMove;
         PlayerController.IdleAction += IdleOverride;
         XMoveAction += XMove;
+        GameManager.Instance.YoyoFonk(10,gameObject);
     }
 
     private void OnDisable()
@@ -48,15 +50,8 @@ public class Cameraman : Human
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            //Debug.Log(Vector3.Distance(transform.position, GameManager.Instance.GatesSystem.Gates[TargetGateIndex].transform.position));
-            transform.Translate(0, 0, GameManager.Instance.PlayerController.MoveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, GameManager.Instance.GatesSystem.Gates[TargetGateIndex].transform.position) <= 50&&!XMoveControl)
-            {
-                XMoveAction?.Invoke();
-            }
-        }
+        
+        transform.LookAt(GameManager.Instance.PlayerController.gameObject.transform);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,28 +77,17 @@ public class Cameraman : Human
 
     private void CameramanMove()
     {
-        //Agent.enabled = true;
-        if (Vector3.Distance(transform.position,GameManager.Instance.GatesSystem.Gates[TargetGateIndex].transform.position)<=5)
-        {
-            //transform.position = new Vector3(Mathf.Lerp(transform.position.x, GameManager.Instance.GatesSystem.Gates[TargetGateIndex].transform.position.x, Time.deltaTime * 50f), transform.position.y, transform.position.z);
-        }
         WalkStatus();
-        //Agent.SetDestination(GameManager.Instance.Target.position);
-        //gameObject.transform.rotation =new Quaternion(0, 180f, 0,0);
     }
 
     private void IdleOverride()
     {
         IdleStatus();
-        //gameObject.transform.rotation = Quaternion.Euler(0, 180f, 0);
-        //Agent.enabled = false;
     }
 
     private void XMove()
     {
         XMoveControl = true;
-        transform.DOMoveX(GameManager.Instance.GatesSystem.Gates[TargetGateIndex].transform.position.x, 3f);
     }
-
 
 }
