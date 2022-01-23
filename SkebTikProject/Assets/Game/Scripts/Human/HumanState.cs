@@ -11,4 +11,5 @@ public enum HumanState
     TAKEOFF,
     HUGHER,
     DRESSUP,
+    WALKKEEP,
 }

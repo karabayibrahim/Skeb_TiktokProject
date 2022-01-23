@@ -46,16 +46,25 @@ public abstract class Human : MonoBehaviour
                 break;
             case HumanState.TAKEOFF:
                 RunAnimation("TakeOff");
+                RunAnimation("GetAhead");
                 break;
             case HumanState.DRESSUP:
+                _tempState = HumanState.DRESSUP;
                 RunAnimation("DressUp");
+                RunAnimation("GetAhead");
                 break;
             case HumanState.HUGHER:
                 _tempState = HumanState.HUGHER;
                 RunAnimation("HugHer");
                 break;
             case HumanState.SLAPYOUR:
+                _tempState = HumanState.SLAPYOUR;
                 RunAnimation("SlapYour");
+                RunAnimation("GetAhead");
+                break;
+            case HumanState.WALKKEEP:
+                _tempState = HumanState.WALKKEEP;
+                RunAnimation("Walk");
                 break;
             default:
                 break;
@@ -101,7 +110,9 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.WALK:
-                HumanState = HumanState.WALK;
+                break;
+            case HumanState.WALKKEEP:
+                HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.GETAHEAD:
                 HumanState = HumanState.GETAHEAD;
@@ -119,7 +130,7 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.DRESSUP:
-                HumanState = HumanState.GETAHEAD;
+                TempStateControl();
                 break;
             default:
                 break;
@@ -170,6 +181,7 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.WALK;
                 break;
             case HumanState.WALK:
+                HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.GETAHEAD:
                 HumanState = HumanState.GETAHEAD;
@@ -184,6 +196,9 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.HUGHER;
                 break;
             case HumanState.DRESSUP:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.WALKKEEP:
                 HumanState = HumanState.GETAHEAD;
                 break;
             default:
