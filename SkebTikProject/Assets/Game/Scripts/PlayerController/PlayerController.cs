@@ -8,8 +8,11 @@ public class PlayerController : MonoBehaviour
     private float _movementClampPositive = 5f;
     private float _lastFrameFingerPositionX;
     private float _moveFactorX;
+    private int _gateIndex;
 
     public float swerveSpeed;
+    public Female Female;
+    public Male Male;
     public float MoveFactorX => _moveFactorX;
     public float MoveSpeed;
     public float HorizontalSpeed;
@@ -20,6 +23,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public int GateIndex
+    {
+        get
+        {
+            return _gateIndex;
+        }
+        set
+        {
+            if (GateIndex==value)
+            {
+                return;
+            }
+            _gateIndex = value;
+        }
     }
 
     // Update is called once per frame
@@ -49,7 +68,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<ICollectable>()!=null)
         {
-            other.GetComponent<ICollectable>().DoCollect(other.gameObject.GetComponent<ICollectable>().MyIndex);
+            other.GetComponent<ICollectable>().DoCollect(GateIndex);
+            other.GetComponent<ICollectable>().DoCollectNotIndex();
         }
     }
 

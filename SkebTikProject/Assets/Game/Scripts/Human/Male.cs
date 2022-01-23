@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class Male : Human
 {
     // Start is called before the first frame update
@@ -22,6 +22,12 @@ public class Male : Human
             case HumanState.IDLE:
                 break;
             case HumanState.WALK:
+                break;
+            case HumanState.DRESSUP:
+                transform.DOLocalMoveZ(4, 0.01f);
+                break;
+            case HumanState.HUGHER:
+                transform.DOLocalMoveZ(1.25f, 0.01f);
                 break;
             default:
                 break;

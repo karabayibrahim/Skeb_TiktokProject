@@ -6,4 +6,9 @@ public enum HumanState
 {
     IDLE,
     WALK,
+    GETAHEAD,
+    SLAPYOUR,
+    TAKEOFF,
+    HUGHER,
+    DRESSUP,
 }

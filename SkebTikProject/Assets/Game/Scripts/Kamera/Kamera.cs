@@ -7,6 +7,7 @@ public class Kamera : MonoBehaviour
 {
     //float offsetX = 0;
     // Start is called before the first frame update
+    public Tween YoyoT;
     void Start()
     {
         YoyoKamera(45);
@@ -14,7 +15,7 @@ public class Kamera : MonoBehaviour
 
     private void YoyoKamera(float _positive)
     {
-        DOTween.To(() => gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.x, x => gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.x = x, _positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+        YoyoT=DOTween.To(() => gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.x, x => gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.x = x, _positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
     }
     
 

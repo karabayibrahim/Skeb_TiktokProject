@@ -7,7 +7,7 @@ using DG.Tweening;
 public abstract class Human : MonoBehaviour
 {
     private HumanState _humanState;
-
+    private HumanState _tempState;
     public Animator Anim;
 
 
@@ -26,6 +26,7 @@ public abstract class Human : MonoBehaviour
             }
             _humanState = value;
             OnStateChanged();
+            AnimPositon();
         }
     }
 
@@ -38,6 +39,23 @@ public abstract class Human : MonoBehaviour
                 break;
             case HumanState.WALK:
                 RunAnimation("Walk");
+                break;
+            case HumanState.GETAHEAD:
+                _tempState = HumanState.GETAHEAD;
+                RunAnimation("GetAhead");
+                break;
+            case HumanState.TAKEOFF:
+                RunAnimation("TakeOff");
+                break;
+            case HumanState.DRESSUP:
+                RunAnimation("DressUp");
+                break;
+            case HumanState.HUGHER:
+                _tempState = HumanState.HUGHER;
+                RunAnimation("HugHer");
+                break;
+            case HumanState.SLAPYOUR:
+                RunAnimation("SlapYour");
                 break;
             default:
                 break;
@@ -77,10 +95,99 @@ public abstract class Human : MonoBehaviour
     }
     internal void WalkStatus()
     {
-        HumanState = HumanState.WALK;
+        switch (HumanState)
+        {
+            case HumanState.IDLE:
+                TempStateControl();
+                break;
+            case HumanState.WALK:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.GETAHEAD:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.TAKEOFF:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.HUGHER:
+                if (gameObject.tag=="Male")
+                {
+                    HumanState = HumanState.GETAHEAD;
+                }
+                break;
+            case HumanState.SLAPYOUR:
+                TempStateControl();
+                break;
+            case HumanState.DRESSUP:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            default:
+                break;
+        }
+        
     }
     internal void IdleStatus()
     {
-        HumanState = HumanState.IDLE;
+        switch (HumanState)
+        {
+            case HumanState.IDLE:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.WALK:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.GETAHEAD:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.SLAPYOUR:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.TAKEOFF:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.HUGHER:
+                if (gameObject.tag=="Male")
+                {
+                    HumanState = HumanState.IDLE;
+                }
+                TempStateControl();
+                break;
+            case HumanState.DRESSUP:
+                HumanState = HumanState.IDLE;
+                break;
+            default:
+                HumanState = HumanState.IDLE;
+                break;
+        }
+        //HumanState = HumanState.IDLE;
+    }
+
+    private void TempStateControl()
+    {
+        switch (_tempState)
+        {
+            case HumanState.IDLE:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.WALK:
+                break;
+            case HumanState.GETAHEAD:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.SLAPYOUR:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.TAKEOFF:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.HUGHER:
+                HumanState = HumanState.HUGHER;
+                break;
+            case HumanState.DRESSUP:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            default:
+                break;
+        }
     }
 }

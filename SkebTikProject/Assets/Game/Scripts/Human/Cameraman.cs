@@ -51,16 +51,16 @@ public class Cameraman : Human
     void Update()
     {
         
-        transform.LookAt(GameManager.Instance.PlayerController.gameObject.transform);
+        transform.LookAt(GameManager.Instance.CurrentLevel.PlayerController.gameObject.transform);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<ICollectCameraman>()!=null)
-        {
-            other.gameObject.GetComponent<ICollectCameraman>().DoCollectCameraman();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.GetComponent<ICollectable>()!=null)
+    //    {
+    //        other.gameObject.GetComponent<ICollectable>().DoCollectCameraman();
+    //    }
+    //}
 
     public override void AnimPositon()
     {
