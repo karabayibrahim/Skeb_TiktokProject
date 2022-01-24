@@ -61,7 +61,8 @@ public class Gate : MonoBehaviour, ICollectable
     {
         var newParticle = Instantiate(GameManager.Instance.DataParticles.Particles[0], transform.position, Quaternion.identity,transform);
         newParticle.transform.localPosition = new Vector3(0, 0, 0);
-        Destroy(CoupleGate.gameObject, 0.5f);
-        Destroy(gameObject, 0.5f);
+        newParticle.transform.SetParent(null);
+        Destroy(CoupleGate.gameObject);
+        Destroy(gameObject);
     }
 }

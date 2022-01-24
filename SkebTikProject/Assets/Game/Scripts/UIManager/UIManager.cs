@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject PhonePanel;
     public Image BarMove;
-
+    public GameObject Bar;
     private float distance;
     private float startAmount;
     private float amount;
@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
 
     private void FinishStatus()
     {
+        Bar.SetActive(false);
         finishBool = true;
         BarMove.fillAmount = 1f;
     }

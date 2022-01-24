@@ -8,6 +8,7 @@ public class PhonePanel : MonoBehaviour
     public TextMeshProUGUI LikeCountText;
     public TextMeshProUGUI CommentCountText;
     public TextMeshProUGUI ShareCounText;
+    public GameObject LikeParticle;
 
     private double LikeCount;
     private double CommentCount;
@@ -27,7 +28,7 @@ public class PhonePanel : MonoBehaviour
     private void CountAssigment()
     {
         LikeCount = Random.Range(50.1f,100.9f);
-        DOTween.To(() => LikeCount, x => LikeCount = x, System.Math.Round(100.9f,1), 10f).OnUpdate(() => WriteValue(LikeCount, LikeCountText));
+        DOTween.To(() => LikeCount, x => LikeCount = x, System.Math.Round(100.9f,1), 10f).OnUpdate(() => WriteValue(LikeCount, LikeCountText)).OnComplete(()=>LikeParticle.SetActive(false));
         CommentCount = Random.Range(1000f, 9000f);
         DOTween.To(() => CommentCount, x => CommentCount = x, System.Math.Round(9000f,0), 10f).OnUpdate(() => CommentWrite(CommentCount,CommentCountText));
         ShareCount = Random.Range(25.1f, 60.9f);

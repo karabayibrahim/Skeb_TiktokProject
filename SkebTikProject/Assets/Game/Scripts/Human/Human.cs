@@ -57,22 +57,22 @@ public abstract class Human : MonoBehaviour
                 RunAnimation("GetAhead");
                 break;
             case HumanState.TAKEOFF:
-                RunAnimation("TakeOff");
-                RunAnimation("GetAhead");
+                RunAnimationDelay("TakeOff");
+                RunAnimationDelay("GetAhead");
                 break;
             case HumanState.DRESSUP:
                 _tempState = HumanState.DRESSUP;
-                RunAnimation("DressUp");
-                RunAnimation("GetAhead");
+                RunAnimationDelay("DressUp");
+                RunAnimationDelay("GetAhead");
                 break;
             case HumanState.HUGHER:
                 _tempState = HumanState.HUGHER;
-                RunAnimation("HugHer");
+                RunAnimationDelay("HugHer");
                 break;
             case HumanState.SLAPYOUR:
                 _tempState = HumanState.SLAPYOUR;
-                RunAnimation("SlapYour");
-                RunAnimation("GetAhead");
+                RunAnimationDelay("SlapYour");
+                RunAnimationDelay("GetAhead");
                 break;
             case HumanState.WALKKEEP:
                 _tempState = HumanState.WALKKEEP;
@@ -112,7 +112,11 @@ public abstract class Human : MonoBehaviour
 
     private void RunAnimation(string _animName)
     {
-        Anim.CrossFade(_animName, 0.05f);
+        Anim.CrossFade(_animName, 0.001f);
+    }
+    private void RunAnimationDelay(string _animName)
+    {
+        Anim.CrossFade(_animName, 1f);
     }
     internal void AssigmentComponent()
     {
