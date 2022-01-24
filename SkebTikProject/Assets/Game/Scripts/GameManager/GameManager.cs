@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
     private GameState _gamaState;
 
     public Cameraman Cameraman;
-    public Transform Target;
+    public DataParticles DataParticles;
     public Level CurrentLevel;
     public UIManager UIManager;
     public static Action GateTriggerAction;

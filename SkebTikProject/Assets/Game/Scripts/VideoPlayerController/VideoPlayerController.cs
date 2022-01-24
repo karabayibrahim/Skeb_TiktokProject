@@ -54,6 +54,7 @@ public class VideoPlayerController : MonoBehaviour
         Male.IdleStatus();
         Female.IdleStatus();
         ActionBool = false;
+        Camera.GetComponent<SecondKamera>().enabled = false;
 
     }
 

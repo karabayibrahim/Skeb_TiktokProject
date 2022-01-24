@@ -11,6 +11,7 @@ public class Gate : MonoBehaviour, ICollectable
         gameObject.GetComponent<Collider>().enabled = false;
         Trigged = true;
         CoupleGate.Trigged = true;
+        ParticleStatus();
         if (gameObject.tag=="Positive")
         {
             var player = GameManager.Instance.CurrentLevel.PlayerController;
@@ -54,5 +55,13 @@ public class Gate : MonoBehaviour, ICollectable
     private void FinishStatus()
     {
         gameObject.SetActive(false);
+    }
+
+    private void ParticleStatus()
+    {
+        var newParticle = Instantiate(GameManager.Instance.DataParticles.Particles[0], transform.position, Quaternion.identity,transform);
+        newParticle.transform.localPosition = new Vector3(0, 0, 0);
+        Destroy(CoupleGate.gameObject, 0.5f);
+        Destroy(gameObject, 0.5f);
     }
 }

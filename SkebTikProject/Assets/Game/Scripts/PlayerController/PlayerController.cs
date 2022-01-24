@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 touchPos = _theTouch.deltaPosition;
                 if (touchPos != Vector2.zero)
                 {
-                    transform.Translate(touchPos.x * (HorizontalSpeed / 100) * Time.deltaTime, 0, 0);
+                    transform.Translate(-touchPos.x * (HorizontalSpeed / 100) * Time.deltaTime, 0, 0);
                     transform.position = new Vector3(Mathf.Clamp(transform.position.x, _movementClampNegative, _movementClampPositive), transform.position.y, transform.position.z);
                 }
             }

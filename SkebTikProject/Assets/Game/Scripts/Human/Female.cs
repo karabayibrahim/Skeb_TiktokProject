@@ -12,7 +12,7 @@ public class Female : Human
         if (!Fake)
         {
             GameManager.GameStartAction += StartStatusSub;
-            StartStatus(9.5f, 0.5f, 0, -90f, "Start", 0.001f);
+            StartStatus(9.5f, -0.63f, 0, -90f, "Start", 0.001f);
         }
         base.AssigmentComponent();
     }

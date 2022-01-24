@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     public CinemachineVirtualCamera SecondCam;
     public VideoPlayerController VideoPlayerController;
     public GameObject MainPhone;
+    public GameObject FinishObject;
     void Start()
     {
         Finish.FinishAction += FinishStatus;
