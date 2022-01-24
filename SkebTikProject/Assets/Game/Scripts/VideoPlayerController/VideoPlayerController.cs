@@ -37,8 +37,10 @@ public class VideoPlayerController : MonoBehaviour
     private IEnumerator ControlTime()
     {
         //Debug.Log("CouCalýstý");
-        Male.WalkStatus();
-        Female.WalkStatus();
+        //Male.WalkStatus();
+        Male.GetComponent<Animator>().CrossFade("Walk", 0.01f);
+        Female.GetComponent<Animator>().CrossFade("Walk", 0.01f);
+        //Female.WalkStatus();
         yield return new WaitForSeconds(2f);
         Male.HumanState = VideoHumanState[0];
         Female.HumanState = VideoHumanState[0];

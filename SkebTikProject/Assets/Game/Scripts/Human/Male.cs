@@ -5,11 +5,21 @@ using DG.Tweening;
 public class Male : Human
 {
     public GameObject MyHips;
+    public bool Fake = false;
     void Start()
     {
+        if (!Fake)
+        {
+            GameManager.GameStartAction += StartStatusSub;
+            StartStatus(9.5f, 0.9f, -5f, -90f, "Start", 0.001f);
+        }
         base.AssigmentComponent();
     }
 
+    private void OnDisable()
+    {
+        GameManager.GameStartAction -= StartStatusSub;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +43,16 @@ public class Male : Human
                 break;
         }
     }
+    private void StartStatus(float x, float y, float z, float yRot, string anim, float duration)
+    {
+        GetComponent<Animator>().CrossFade(anim, 0.01f);
+        transform.DOLocalMove(new Vector3(x, y, z), duration);
+        transform.DOLocalRotate(new Vector3(0, yRot, 0), duration);
+    }
 
+    private void StartStatusSub()
+    {
+        StartStatus(1.5f,0,0,0,"Walk",0.5f);
+    }
 
 }

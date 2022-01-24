@@ -5,6 +5,7 @@ using Cinemachine;
 public class Level : MonoBehaviour
 {
     public DataHumanState DataHumanState;
+    public DataTextState DataTextState;
     public PlayerController PlayerController;
     public CinemachineVirtualCamera LevelCam;
     public CinemachineVirtualCamera SecondCam;

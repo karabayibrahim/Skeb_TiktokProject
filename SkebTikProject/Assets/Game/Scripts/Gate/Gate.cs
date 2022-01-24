@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Gate : MonoBehaviour, ICollectable
 {
+    public Gate CoupleGate;
+    public bool Trigged = false;
+    public bool Rotete = false;
     public void DoCollect(int Index)
     {
         gameObject.GetComponent<Collider>().enabled = false;
+        Trigged = true;
+        CoupleGate.Trigged = true;
         if (gameObject.tag=="Positive")
         {
             var player = GameManager.Instance.CurrentLevel.PlayerController;
@@ -23,7 +27,7 @@ public class Gate : MonoBehaviour, ICollectable
             player.Female.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStatesNegative[Index];
             player.GateIndex++;
         }
-        
+        GameManager.GateTriggerAction?.Invoke();
     }
 
     public void DoCollectNotIndex()

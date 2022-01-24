@@ -36,25 +36,16 @@ public class Cameraman : Human
 
     void Start()
     {
-        if (YoyoBool)
-        {
-            GetComponent<Animator>().CrossFade("IdleLegRight", 0.05f);
-        }
-        else
-        {
-            GetComponent<Animator>().CrossFade("IdleLeg", 0.05f);
-        }
-        base.AssigmentComponent();
-        PlayerController.WalkActon += CameramanMove;
-        PlayerController.IdleAction += IdleOverride;
-        XMoveAction += XMove;
-        YoyoFonk(10, gameObject);
+        GameManager.GameStartAction += StartStatus;
+        GetComponent<Animator>().CrossFade("Start", 0.01f);
+        
     }
 
     private void OnDisable()
     {
         PlayerController.WalkActon -= CameramanMove;
         PlayerController.IdleAction -= IdleOverride;
+        GameManager.GameStartAction -= StartStatus;
         XMoveAction -= XMove;
     }
 
@@ -65,15 +56,6 @@ public class Cameraman : Human
         //transform.LookAt(GameManager.Instance.CurrentLevel.PlayerController.Male.transform);
         transform.LookAt(LookPoz);
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.GetComponent<ICollectable>()!=null)
-    //    {
-    //        other.gameObject.GetComponent<ICollectable>().DoCollectCameraman();
-    //    }
-    //}
-
     public override void AnimPositon()
     {
         switch (HumanState)
@@ -85,6 +67,25 @@ public class Cameraman : Human
             default:
                 break;
         }
+    }
+
+    private void StartStatus()
+    {
+        if (YoyoBool)
+        {
+            GetComponent<Animator>().CrossFade("IdleLegRight", 0.05f);
+        }
+        else
+        {
+            GetComponent<Animator>().CrossFade("IdleLeg", 0.05f);
+        }
+        GetComponent<Animator>().CrossFade("Walk", 0.01f);
+        GetComponent<Animator>().CrossFade("Idle", 0.01f);
+        base.AssigmentComponent();
+        PlayerController.WalkActon += CameramanMove;
+        PlayerController.IdleAction += IdleOverride;
+        XMoveAction += XMove;
+        YoyoFonk(10, gameObject);
     }
 
     private void CameramanMove()

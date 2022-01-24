@@ -78,6 +78,10 @@ public abstract class Human : MonoBehaviour
                 _tempState = HumanState.WALKKEEP;
                 RunAnimation("Walk");
                 break;
+            case HumanState.START:
+                _tempState = HumanState.START;
+                RunAnimation("Start");
+                break;
             default:
                 break;
         }
@@ -85,12 +89,12 @@ public abstract class Human : MonoBehaviour
 
     void Start()
     {
-        
     }
     private void OnEnable()
     {
         PlayerController.WalkActon += WalkStatus;
         PlayerController.IdleAction += IdleStatus;
+        HumanState = HumanState.START;
     }
 
 
@@ -122,6 +126,7 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.WALK:
+                HumanState = HumanState.WALK;
                 //if (gameObject.tag=="Cameraman")
                 //{
                 //    //gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.001f);
@@ -225,6 +230,9 @@ public abstract class Human : MonoBehaviour
                 break;
             case HumanState.WALKKEEP:
                 HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.START:
+                HumanState = HumanState.WALK;
                 break;
             default:
                 break;
