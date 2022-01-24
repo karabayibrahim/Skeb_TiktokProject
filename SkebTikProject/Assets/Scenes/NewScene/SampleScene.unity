@@ -1016,7 +1016,7 @@ MonoBehaviour:
   Female: {fileID: 1512660540}
   Male: {fileID: 1405603699534284174}
   MoveSpeed: 20
-  HorizontalSpeed: 100
+  HorizontalSpeed: 200
   Cameraman: {fileID: 174228378}
 --- !u!65 &399187997
 BoxCollider:

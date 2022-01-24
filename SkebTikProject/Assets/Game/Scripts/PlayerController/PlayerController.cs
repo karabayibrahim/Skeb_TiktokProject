@@ -50,12 +50,14 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            HorizontalMovement();
+            transform.Translate(0, 0, MoveSpeed * Time.deltaTime);
+            //HorizontalMovement();
         }
         else if (Input.GetMouseButtonUp(0))
         {
             IdleAction?.Invoke();
         }
+        HorizontalMovement();
 
     }
 
@@ -75,7 +77,6 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        transform.Translate(0,0,MoveSpeed*Time.deltaTime);
         #region MobileHorizontal
         if (Input.touchCount > 0)
         {
