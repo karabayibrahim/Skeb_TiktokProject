@@ -36,6 +36,18 @@ public abstract class Human : MonoBehaviour
         {
             case HumanState.IDLE:
                 RunAnimation("Idle");
+                if (gameObject.tag == "Cameraman")
+                {
+                    if (gameObject.GetComponent<Cameraman>().YoyoBool)
+                    {
+                        RunAnimation("IdleLegRight");
+                    }
+                    else
+                    {
+                        RunAnimation("IdleLeg");
+                    }
+                    //gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 90f, 0), 0.001f);
+                }
                 break;
             case HumanState.WALK:
                 RunAnimation("Walk");
@@ -96,7 +108,7 @@ public abstract class Human : MonoBehaviour
 
     private void RunAnimation(string _animName)
     {
-        Anim.CrossFade(_animName, 0.01f);
+        Anim.CrossFade(_animName, 0.05f);
     }
     internal void AssigmentComponent()
     {
@@ -110,6 +122,10 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.WALK:
+                //if (gameObject.tag=="Cameraman")
+                //{
+                //    //gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.001f);
+                //}
                 break;
             case HumanState.WALKKEEP:
                 HumanState = HumanState.GETAHEAD;
@@ -124,6 +140,10 @@ public abstract class Human : MonoBehaviour
                 if (gameObject.tag=="Male")
                 {
                     HumanState = HumanState.GETAHEAD;
+                }
+                else
+                {
+                    gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
                 }
                 break;
             case HumanState.SLAPYOUR:
@@ -161,6 +181,10 @@ public abstract class Human : MonoBehaviour
                 {
                     HumanState = HumanState.IDLE;
                 }
+                else
+                {
+                    //gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
+                }
                 TempStateControl();
                 break;
             case HumanState.DRESSUP:
@@ -194,6 +218,7 @@ public abstract class Human : MonoBehaviour
                 break;
             case HumanState.HUGHER:
                 HumanState = HumanState.HUGHER;
+                //HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.DRESSUP:
                 HumanState = HumanState.GETAHEAD;

@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class Male : Human
 {
-    // Start is called before the first frame update
+    public GameObject MyHips;
     void Start()
     {
         base.AssigmentComponent();

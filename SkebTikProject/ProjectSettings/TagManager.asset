@@ -8,6 +8,7 @@ TagManager:
   - Male
   - Female
   - Missile
+  - Cameraman
   layers:
   - Default
   - TransparentFX

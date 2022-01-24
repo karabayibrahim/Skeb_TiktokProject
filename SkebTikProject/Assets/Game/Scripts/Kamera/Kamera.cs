@@ -10,7 +10,7 @@ public class Kamera : MonoBehaviour
     public Tween YoyoT;
     void Start()
     {
-        YoyoKamera(45);
+        YoyoKamera(12);
     }
 
     private void YoyoKamera(float _positive)

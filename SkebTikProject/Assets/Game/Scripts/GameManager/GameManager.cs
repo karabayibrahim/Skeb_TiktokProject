@@ -20,10 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
         
     }
 
-    public void YoyoFonk(float _positive,GameObject _obj)
-    {
-        _obj.transform.DOMoveX(_positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-    }
+    
 
     //private void FinishStatus()
     //{

@@ -25,17 +25,17 @@ public class Female : Human
             case HumanState.WALK:
                 break;
             case HumanState.GETAHEAD:
-                transform.DOLocalMove(new Vector3(1.5f,0,7f),0.01f);
+                transform.DOLocalMove(new Vector3(1.5f,0,7f),0.5f);
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.TAKEOFF:
-                Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0,-0.15f,0.9f),1.8f);
+                Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0,-0.15f,0.9f),10f);
                 transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.01f);
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.DRESSUP:
                 Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0, -0.18f, -0.4f), 1.8f);
-                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.01f);
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.SLAPYOUR:
@@ -43,8 +43,9 @@ public class Female : Human
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.HUGHER:
-                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.01f);
-                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
+                transform.DORotate(new Vector3(0, 180f, 0), 0.01f);
+                //gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
                 break;
             default:
                 break;

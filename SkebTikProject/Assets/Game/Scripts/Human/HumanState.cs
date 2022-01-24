@@ -5,6 +5,7 @@ using UnityEngine;
 public enum HumanState
 {
     IDLE,
+    IDLELEGCAM,
     WALK,
     GETAHEAD,
     SLAPYOUR,

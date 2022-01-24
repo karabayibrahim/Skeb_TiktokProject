@@ -12,6 +12,9 @@ public class Cameraman : Human
     public NavMeshAgent Agent;
     public bool XMoveControl = false;
     public static Action XMoveAction;
+    public GameObject MySpine;
+    public bool YoyoBool = true;
+    public int YoyoCount = 0;
 
     // Start is called before the first frame update
 
@@ -33,11 +36,19 @@ public class Cameraman : Human
 
     void Start()
     {
+        if (YoyoBool)
+        {
+            GetComponent<Animator>().CrossFade("IdleLegRight", 0.05f);
+        }
+        else
+        {
+            GetComponent<Animator>().CrossFade("IdleLeg", 0.05f);
+        }
         base.AssigmentComponent();
         PlayerController.WalkActon += CameramanMove;
         PlayerController.IdleAction += IdleOverride;
         XMoveAction += XMove;
-        GameManager.Instance.YoyoFonk(10,gameObject);
+        YoyoFonk(10, gameObject);
     }
 
     private void OnDisable()
@@ -50,8 +61,9 @@ public class Cameraman : Human
     // Update is called once per frame
     void Update()
     {
-        
-        transform.LookAt(GameManager.Instance.CurrentLevel.PlayerController.gameObject.transform);
+        var LookPoz = new Vector3(GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.x, GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.y, GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.z);
+        //transform.LookAt(GameManager.Instance.CurrentLevel.PlayerController.Male.transform);
+        transform.LookAt(LookPoz);
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -90,4 +102,35 @@ public class Cameraman : Human
         XMoveControl = true;
     }
 
+    public void YoyoFonk(float _positive, GameObject _obj)
+    {
+        _obj.transform.DOMoveX(_positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo).OnStepComplete(LegControl);
+    }
+
+    private void LegControl()
+    {
+        YoyoCount++;
+        if (YoyoCount%2==0)
+        {
+            YoyoBool = true;
+        }
+        else
+        {
+            YoyoBool = false;
+        }
+        if (YoyoBool)
+        {
+            if (HumanState == HumanState.IDLE)
+            {
+                GetComponent<Animator>().CrossFade("IdleLegRight", 0.05f);
+            }
+        }
+        else
+        {
+            if (HumanState==HumanState.IDLE)
+            {
+                GetComponent<Animator>().CrossFade("IdleLeg", 0.05f);
+            }
+        }
+    }
 }
