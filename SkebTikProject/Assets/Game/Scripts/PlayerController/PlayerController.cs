@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 public class PlayerController : MonoBehaviour
 {
-    private float _movementClampNegative = -5f;
-    private float _movementClampPositive = 5f;
+    private float _movementClampNegative = -15.5f;
+    private float _movementClampPositive = 15.5f;
     private float _lastFrameFingerPositionX;
     private float _moveFactorX;
     private int _gateIndex;
@@ -92,20 +92,20 @@ public class PlayerController : MonoBehaviour
             }
         }
         #endregion
-        float swerveAmount = Time.deltaTime * swerveSpeed * MoveFactorX;
-        transform.Translate(-swerveAmount, 0, 0);
-        if (Input.GetMouseButtonDown(0))
-        {
-            _lastFrameFingerPositionX = Input.mousePosition.x;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            _moveFactorX = Input.mousePosition.x - _lastFrameFingerPositionX;
-            _lastFrameFingerPositionX = Input.mousePosition.x;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            _moveFactorX = 0f;
-        }
+        //float swerveAmount = Time.deltaTime * swerveSpeed * MoveFactorX;
+        //transform.Translate(-swerveAmount, 0, 0);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    _lastFrameFingerPositionX = Input.mousePosition.x;
+        //}
+        //else if (Input.GetMouseButton(0))
+        //{
+        //    _moveFactorX = Input.mousePosition.x - _lastFrameFingerPositionX;
+        //    _lastFrameFingerPositionX = Input.mousePosition.x;
+        //}
+        //else if (Input.GetMouseButtonUp(0))
+        //{
+        //    _moveFactorX = 0f;
+        //}
     }
 }
