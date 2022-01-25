@@ -4,8 +4,9 @@ using UnityEngine;
 using Cinemachine;
 public class Level : MonoBehaviour
 {
-    public DataHumanState DataHumanState;
-    public DataTextState DataTextState;
+    public DataStateLevel DataStateLevel;
+    //public DataHumanState DataHumanState;
+    //public DataTextState DataTextState;
     public PlayerController PlayerController;
     public CinemachineVirtualCamera LevelCam;
     public CinemachineVirtualCamera SecondCam;

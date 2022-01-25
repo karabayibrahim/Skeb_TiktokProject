@@ -96,6 +96,16 @@ public abstract class Human : MonoBehaviour
                 _tempState = HumanState.HUGWALK;
                 RunAnimation("HugWalk");
                 break;
+            case HumanState.POINTBOY:
+                _tempState = HumanState.POINTBOY;
+                RunAnimation("PointBoy");
+                RunAnimation("Walk");
+                break;
+            case HumanState.POINTGIRL:
+                _tempState = HumanState.POINTGIRL;
+                RunAnimation("PointGirl");
+                RunAnimation("Walk");
+                break;
             default:
                 break;
         }
@@ -148,7 +158,7 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.WALK:
-                HumanState = HumanState.WALK;
+                TempStateControl();
                 break;
             case HumanState.WALKKEEP:
                 HumanState = HumanState.WALK;
@@ -176,6 +186,14 @@ public abstract class Human : MonoBehaviour
             case HumanState.DRESSUP:
                 HumanState = HumanState.GETAHEAD;
                 break;
+            case HumanState.POINTBOY:
+                //TempStateControl();
+                HumanState = HumanState.POINTBOY;
+                break;
+            case HumanState.POINTGIRL:
+                //TempStateControl();
+                HumanState = HumanState.POINTGIRL;
+                break;
             default:
                 break;
         }
@@ -189,6 +207,7 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.WALK:
+                //TempStateControl();
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.GETAHEAD:
@@ -214,6 +233,12 @@ public abstract class Human : MonoBehaviour
                 TempStateControl();
                 break;
             case HumanState.DRESSUP:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.POINTBOY:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.POINTGIRL:
                 HumanState = HumanState.IDLE;
                 break;
             default:
@@ -254,6 +279,14 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.WALK;
                 break;
             case HumanState.START:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.POINTBOY:
+                //HumanState = HumanState.POINTBOY;
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.POINTGIRL:
+                //HumanState = HumanState.POINTGIRL;
                 HumanState = HumanState.WALK;
                 break;
             default:

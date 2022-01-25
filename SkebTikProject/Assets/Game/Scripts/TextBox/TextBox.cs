@@ -35,7 +35,7 @@ public class TextBox : MonoBehaviour
         {
             if (gameObject.tag == "Positive")
             {
-                var newText = Instantiate(GameManager.Instance.CurrentLevel.DataTextState.Positive[player.GateIndex], textPoz, Quaternion.identity, transform);
+                var newText = Instantiate(GameManager.Instance.CurrentLevel.DataStateLevel.DataTextLevels[GameManager.Instance.LevelIndex].Positive[player.GateIndex], textPoz, Quaternion.identity, transform);
                 if (MyGate.Rotete)
                 {
                     newText.transform.DOLocalRotate(new Vector3(0,180,180), 0.001f);
@@ -51,7 +51,7 @@ public class TextBox : MonoBehaviour
             }
             else
             {
-                var newText = Instantiate(GameManager.Instance.CurrentLevel.DataTextState.Negative[player.GateIndex], textPoz, Quaternion.identity, transform);
+                var newText = Instantiate(GameManager.Instance.CurrentLevel.DataStateLevel.DataTextLevels[GameManager.Instance.LevelIndex].Negative[player.GateIndex], textPoz, Quaternion.identity, transform);
                 if (MyGate.Rotete)
                 {
                     newText.transform.DOLocalRotate(new Vector3(0, 180, 180), 0.001f);

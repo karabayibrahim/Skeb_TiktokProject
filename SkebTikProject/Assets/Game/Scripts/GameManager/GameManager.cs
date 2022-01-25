@@ -7,6 +7,8 @@ using System;
 public class GameManager : MonoSingleton<GameManager>
 {
     private GameState _gamaState;
+    private int _levelIndex;
+    private string _playerLevelIndexKey = "PlayerLevelIndex";
 
     public Cameraman Cameraman;
     public DataParticles DataParticles;
@@ -24,15 +26,44 @@ public class GameManager : MonoSingleton<GameManager>
         }
         set
         {
-            if (GameState==value)
+            if (GameState == value)
             {
                 return;
             }
             _gamaState = value;
         }
     }
-    void Start()
+
+    public int LevelIndex
     {
+        get
+        {
+            return _levelIndex;
+        }
+        set
+        {
+            if (LevelIndex==value)
+            {
+                return;
+            }
+            _levelIndex = value;
+            OnLevelIndexChanghed();
+        }
+
+    }
+
+    private void OnLevelIndexChanghed()
+    {
+        PlayerPrefs.SetInt(_playerLevelIndexKey, LevelIndex);
+        Debug.Log("Kayýt"+PlayerPrefs.GetInt(_playerLevelIndexKey));
+    }
+
+    void Awake()
+    {
+        //PlayerPrefs.DeleteAll();
+        //LevelIndex++;
+        LevelIndex = PlayerPrefs.GetInt(_playerLevelIndexKey);
+        Debug.Log(LevelIndex);
         GameState = GameState.START;
     }
     // Update is called once per frame
@@ -40,7 +71,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (GameState==GameState.START)
+            if (GameState == GameState.START)
             {
                 GameStartAction?.Invoke();
             }

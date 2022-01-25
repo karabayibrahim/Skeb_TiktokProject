@@ -41,6 +41,8 @@ public class Female : Human
         switch (HumanState)
         {
             case HumanState.IDLE:
+                transform.DOLocalMove(new Vector3(-1.5f, 0, 0f), 0.5f);
+                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
                 break;
             case HumanState.WALK:
                 break;
@@ -67,6 +69,10 @@ public class Female : Human
                 transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
                 transform.DORotate(new Vector3(0, 180f, 0), 0.01f);
                 //gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
+                break;
+            case HumanState.POINTBOY:
+                transform.DOLocalMove(new Vector3(-3f, 0, 0f), 0.5f);
+                transform.DORotate(new Vector3(0, 45f, 0), 0.5f);
                 break;
             default:
                 break;

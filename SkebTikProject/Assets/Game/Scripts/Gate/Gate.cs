@@ -70,9 +70,9 @@ public class Gate : MonoBehaviour, ICollectable
     {
         yield return new WaitForSeconds(0.3f);
         var player = GameManager.Instance.CurrentLevel.PlayerController;
-        GameManager.Instance.CurrentLevel.VideoPlayerController.VideoHumanState.Add(player.Male.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStates[_index]);
-        player.Male.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStates[_index];
-        player.Female.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStates[_index];
+        GameManager.Instance.CurrentLevel.VideoPlayerController.VideoHumanState.Add(player.Male.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStates[_index]);
+        player.Male.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStates[_index];
+        player.Female.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStates[_index];
         player.GateIndex++;
         GameManager.GateTriggerAction?.Invoke();
         player.GateTrigged = false;
@@ -82,9 +82,9 @@ public class Gate : MonoBehaviour, ICollectable
     {
         yield return new WaitForSeconds(0.3f);
         var player = GameManager.Instance.CurrentLevel.PlayerController;
-        GameManager.Instance.CurrentLevel.VideoPlayerController.VideoHumanState.Add(player.Male.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStatesNegative[_index]);
-        player.Male.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStatesNegative[_index];
-        player.Female.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStatesNegative[_index];
+        GameManager.Instance.CurrentLevel.VideoPlayerController.VideoHumanState.Add(player.Male.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStatesNegative[_index]);
+        player.Male.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStatesNegative[_index];
+        player.Female.HumanState = GameManager.Instance.CurrentLevel.DataStateLevel.DataHumanStates[GameManager.Instance.LevelIndex].HumanStatesNegative[_index];
         player.GateIndex++;
         GameManager.GateTriggerAction?.Invoke();
         player.GateTrigged = false;

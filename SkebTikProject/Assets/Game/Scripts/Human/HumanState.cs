@@ -15,4 +15,6 @@ public enum HumanState
     DRESSUP,
     WALKKEEP,
     HUGWALK,
+    POINTGIRL,
+    POINTBOY,
 }

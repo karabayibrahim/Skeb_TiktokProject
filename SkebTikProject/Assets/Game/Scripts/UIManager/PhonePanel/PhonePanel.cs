@@ -64,9 +64,9 @@ public class PhonePanel : MonoBehaviour
     }
     private void ImagesScaleYoyo()
     {
-        LikeImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-        CommentImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-        ShareImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        LikeImage.transform.DOScale(0.6f, 0.3f).SetLoops(-1, LoopType.Yoyo);
+        CommentImage.transform.DOScale(0.6f, 0.3f).SetLoops(-1, LoopType.Yoyo);
+        ShareImage.transform.DOScale(0.6f, 0.3f).SetLoops(-1, LoopType.Yoyo);
 
     }
 

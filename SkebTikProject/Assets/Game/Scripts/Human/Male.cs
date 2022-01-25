@@ -37,6 +37,8 @@ public class Male : Human
         switch (HumanState)
         {
             case HumanState.IDLE:
+                transform.DOLocalMove(new Vector3(1.5f, 0, 0f), 0.5f);
+                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
                 break;
             case HumanState.WALK:
                 break;
@@ -45,6 +47,10 @@ public class Male : Human
                 break;
             case HumanState.HUGHER:
                 transform.DOLocalMoveZ(1.25f, 0.5f);
+                break;
+            case HumanState.POINTGIRL:
+                transform.DOLocalMove(new Vector3(3f, 0, 0f), 0.5f);
+                transform.DORotate(new Vector3(0, -45f, 0), 0.5f);
                 break;
             default:
                 break;

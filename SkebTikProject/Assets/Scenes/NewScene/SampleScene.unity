@@ -1777,8 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9081e5469f9a51847934b67d6a03eead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataHumanState: {fileID: 11400000, guid: 75aabe4ae1b7ddc4aabce3ece857e104, type: 2}
-  DataTextState: {fileID: 11400000, guid: 88d938677c788f9418d56184b110c9a8, type: 2}
+  DataStateLevel: {fileID: 11400000, guid: 1498ca3172befa340a4f601327da7e0f, type: 2}
   PlayerController: {fileID: 399187996}
   LevelCam: {fileID: 1910236085}
   SecondCam: {fileID: 2021479362}
@@ -19081,6 +19080,10 @@ PrefabInstance:
     - target: {fileID: 3227911213439153873, guid: 58db492528ae31d468a689515a522b3b, type: 3}
       propertyPath: m_Name
       value: Variant2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100083469425895671, guid: 58db492528ae31d468a689515a522b3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6770602252183182817, guid: 58db492528ae31d468a689515a522b3b, type: 3}
       propertyPath: m_RootOrder
