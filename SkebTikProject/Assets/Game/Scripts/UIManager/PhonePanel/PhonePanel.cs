@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PhonePanel : MonoBehaviour
 {
     public TextMeshProUGUI LikeCountText;
     public TextMeshProUGUI CommentCountText;
     public TextMeshProUGUI ShareCounText;
     public GameObject LikeParticle;
+    public Image LikeImage;
+    public Image CommentImage;
+    public Image ShareImage;
+    public Button RetryButton;
 
     private double LikeCount;
     private double CommentCount;
@@ -17,6 +23,13 @@ public class PhonePanel : MonoBehaviour
     void Start()
     {
         CountAssigment();
+        ImagesScaleYoyo();
+        RetryButton.onClick.AddListener(Retry);
+    }
+
+    private void OnDisable()
+    {
+        RetryButton.onClick.RemoveListener(Retry);
     }
 
     // Update is called once per frame
@@ -48,5 +61,18 @@ public class PhonePanel : MonoBehaviour
         _count = System.Math.Round(_count, 0);
         _text.text = _count.ToString();
 
+    }
+    private void ImagesScaleYoyo()
+    {
+        LikeImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        CommentImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        ShareImage.transform.DOScale(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+
+    }
+
+    private void Retry()
+    {
+        //Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

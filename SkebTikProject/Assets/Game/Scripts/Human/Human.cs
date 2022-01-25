@@ -10,7 +10,6 @@ public abstract class Human : MonoBehaviour
     private HumanState _tempState;
     public Animator Anim;
 
-
     public abstract void AnimPositon();
     public HumanState HumanState
     {
@@ -25,6 +24,7 @@ public abstract class Human : MonoBehaviour
                 return;
             }
             _humanState = value;
+            
             OnStateChanged();
             AnimPositon();
         }
@@ -36,18 +36,23 @@ public abstract class Human : MonoBehaviour
         {
             case HumanState.IDLE:
                 RunAnimation("Idle");
-                if (gameObject.tag == "Cameraman")
+                var Cameraman = GameManager.Instance.CurrentLevel.PlayerController.Cameraman;
+                if (Cameraman!=null)
                 {
-                    if (gameObject.GetComponent<Cameraman>().YoyoBool)
+                    if (Cameraman.gameObject.tag == "Cameraman")
                     {
-                        RunAnimation("IdleLegRight");
+                        if (Cameraman.gameObject.GetComponent<Cameraman>().YoyoBool)
+                        {
+                            RunAnimation("IdleLegRight");
+                        }
+                        else
+                        {
+                            RunAnimation("IdleLeg");
+                        }
+                        Cameraman.gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 90f, 0), 0.001f);
                     }
-                    else
-                    {
-                        RunAnimation("IdleLeg");
-                    }
-                    //gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 90f, 0), 0.001f);
                 }
+                
                 break;
             case HumanState.WALK:
                 RunAnimation("Walk");
@@ -57,22 +62,22 @@ public abstract class Human : MonoBehaviour
                 RunAnimation("GetAhead");
                 break;
             case HumanState.TAKEOFF:
-                RunAnimationDelay("TakeOff");
-                RunAnimationDelay("GetAhead");
+                RunAnimation("TakeOff");
+                RunAnimation("GetAhead");
                 break;
             case HumanState.DRESSUP:
                 _tempState = HumanState.DRESSUP;
-                RunAnimationDelay("DressUp");
-                RunAnimationDelay("GetAhead");
+                RunAnimation("DressUp");
+                RunAnimation("GetAhead");
                 break;
             case HumanState.HUGHER:
                 _tempState = HumanState.HUGHER;
-                RunAnimationDelay("HugHer");
+                RunAnimation("HugHer");
                 break;
             case HumanState.SLAPYOUR:
                 _tempState = HumanState.SLAPYOUR;
-                RunAnimationDelay("SlapYour");
-                RunAnimationDelay("GetAhead");
+                RunAnimation("SlapYour");
+                RunAnimation("GetAhead");
                 break;
             case HumanState.WALKKEEP:
                 _tempState = HumanState.WALKKEEP;
@@ -90,6 +95,7 @@ public abstract class Human : MonoBehaviour
     void Start()
     {
     }
+
     private void OnEnable()
     {
         PlayerController.WalkActon += WalkStatus;
@@ -112,12 +118,15 @@ public abstract class Human : MonoBehaviour
 
     private void RunAnimation(string _animName)
     {
-        Anim.CrossFade(_animName, 0.001f);
+        if (Anim!=null)
+        {
+            Anim.CrossFade(_animName, 0.001f);
+        }
     }
-    private void RunAnimationDelay(string _animName)
-    {
-        Anim.CrossFade(_animName, 1f);
-    }
+    //private void RunAnimationDelay(string _animName)
+    //{
+    //    Anim.CrossFade(_animName, 2f);
+    //}
     internal void AssigmentComponent()
     {
         Anim = GetComponent<Animator>();
@@ -156,10 +165,10 @@ public abstract class Human : MonoBehaviour
                 }
                 break;
             case HumanState.SLAPYOUR:
-                TempStateControl();
+                HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.DRESSUP:
-                TempStateControl();
+                HumanState = HumanState.GETAHEAD;
                 break;
             default:
                 break;

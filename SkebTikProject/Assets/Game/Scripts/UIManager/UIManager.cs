@@ -40,8 +40,15 @@ public class UIManager : MonoBehaviour
 
     private void FinishStatus()
     {
+        StartCoroutine(PhonePanelTimer());
         Bar.SetActive(false);
         finishBool = true;
         BarMove.fillAmount = 1f;
+    }
+
+    private IEnumerator PhonePanelTimer()
+    {
+        yield return new WaitForSeconds(2f);
+        PhonePanel.SetActive(true);
     }
 }

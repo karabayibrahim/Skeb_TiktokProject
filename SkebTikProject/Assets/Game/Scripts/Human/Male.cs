@@ -14,11 +14,13 @@ public class Male : Human
             StartStatus(9.5f, -0.19f, -5f, -90f, "Start", 0.001f);
         }
         base.AssigmentComponent();
+        Finish.FinishAction += FinishStatus;
     }
 
     private void OnDisable()
     {
         GameManager.GameStartAction -= StartStatusSub;
+        Finish.FinishAction -= FinishStatus;
     }
     // Update is called once per frame
     void Update()
@@ -34,10 +36,10 @@ public class Male : Human
             case HumanState.WALK:
                 break;
             case HumanState.DRESSUP:
-                transform.DOLocalMoveZ(4, 0.01f);
+                transform.DOLocalMoveZ(4, 0.5f);
                 break;
             case HumanState.HUGHER:
-                transform.DOLocalMoveZ(1.25f, 0.01f);
+                transform.DOLocalMoveZ(1.25f, 0.5f);
                 break;
             default:
                 break;
@@ -53,6 +55,11 @@ public class Male : Human
     private void StartStatusSub()
     {
         StartStatus(1.5f,0,0,0,"Walk",0.5f);
+    }
+    private void FinishStatus()
+    {
+        GetComponent<Animator>().enabled = false;
+        //gameObject.SetActive(false);
     }
 
 }

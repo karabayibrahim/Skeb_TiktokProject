@@ -6,37 +6,23 @@ using DG.Tweening;
 using System;
 public class Cameraman : Human
 {
-    private int _targetGateIndex = 0;
-    private Transform Target;
 
-    public NavMeshAgent Agent;
+    private Tween YoyoT;
+
     public bool XMoveControl = false;
     public static Action XMoveAction;
     public GameObject MySpine;
+    public GameObject FakePhone;
     public bool YoyoBool = true;
     public int YoyoCount = 0;
 
     // Start is called before the first frame update
 
-    public int TargetGateIndex
-    {
-        get
-        {
-            return _targetGateIndex;
-        }
-        set
-        {
-            if (TargetGateIndex == value)
-            {
-                return;
-            }
-            _targetGateIndex = value;
-        }
-    }
 
     void Start()
     {
         GameManager.GameStartAction += StartStatus;
+        Finish.FinishAction += FinishStatus;
         GetComponent<Animator>().CrossFade("Start", 0.01f);
         
     }
@@ -46,6 +32,7 @@ public class Cameraman : Human
         PlayerController.WalkActon -= CameramanMove;
         PlayerController.IdleAction -= IdleOverride;
         GameManager.GameStartAction -= StartStatus;
+        Finish.FinishAction -= FinishStatus;
         XMoveAction -= XMove;
     }
 
@@ -105,7 +92,7 @@ public class Cameraman : Human
 
     public void YoyoFonk(float _positive, GameObject _obj)
     {
-        _obj.transform.DOMoveX(_positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo).OnStepComplete(LegControl);
+        YoyoT=_obj.transform.DOMoveX(_positive, 8f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo).OnStepComplete(LegControl);
     }
 
     private void LegControl()
@@ -133,5 +120,12 @@ public class Cameraman : Human
                 GetComponent<Animator>().CrossFade("IdleLeg", 0.05f);
             }
         }
+    }
+
+    private void FinishStatus()
+    {
+        YoyoT.Kill();
+        GetComponent<Animator>().enabled = false;
+        FakePhone.gameObject.SetActive(false);
     }
 }

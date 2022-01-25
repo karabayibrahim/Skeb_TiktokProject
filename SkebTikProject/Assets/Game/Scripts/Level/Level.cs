@@ -30,7 +30,6 @@ public class Level : MonoBehaviour
 
     private void FinishStatus()
     {
-        GameManager.Instance.UIManager.PhonePanel.SetActive(true);
         MainPhone.SetActive(true);
         LevelCam.enabled = false;
         SecondCam.enabled = true;
