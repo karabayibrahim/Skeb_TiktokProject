@@ -14,4 +14,5 @@ public enum HumanState
     HUGHER,
     DRESSUP,
     WALKKEEP,
+    HUGWALK,
 }

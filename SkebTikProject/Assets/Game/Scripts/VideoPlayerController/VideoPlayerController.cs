@@ -50,8 +50,8 @@ public class VideoPlayerController : MonoBehaviour
         Male.HumanState = VideoHumanState[2];
         Female.HumanState = VideoHumanState[2];
         yield return new WaitForSeconds(2f);
-        Male.IdleStatus();
-        Female.IdleStatus();
+        Male.GetComponent<Animator>().enabled = false;
+        Female.GetComponent<Animator>().enabled = false;
         ActionBool = false;
         Camera.GetComponent<SecondKamera>().enabled = false;
 

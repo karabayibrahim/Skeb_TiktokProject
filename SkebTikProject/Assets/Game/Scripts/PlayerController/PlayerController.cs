@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     public float swerveSpeed;
     public Female Female;
     public Male Male;
+    public GameObject MaleObj;
+    public GameObject FemaleObj;
     public float MoveFactorX => _moveFactorX;
     public float MoveSpeed;
     public float HorizontalSpeed;
     public static Action WalkActon;
     public static Action IdleAction;
     public Transform Cameraman;
+    public bool GateTrigged = false;
     // Start is called before the first frame update
     void Start()
     {

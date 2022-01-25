@@ -24,9 +24,14 @@ public abstract class Human : MonoBehaviour
                 return;
             }
             _humanState = value;
-            
-            OnStateChanged();
-            AnimPositon();
+            if (GameManager.Instance.CurrentLevel.PlayerController.Male != null && GameManager.Instance.CurrentLevel.PlayerController.Female != null)
+            {
+                OnStateChanged();
+            }
+            if (GameManager.Instance.CurrentLevel.PlayerController.Male!=null&& GameManager.Instance.CurrentLevel.PlayerController.Female != null)
+            {
+                AnimPositon();
+            }
         }
     }
 
@@ -87,6 +92,10 @@ public abstract class Human : MonoBehaviour
                 _tempState = HumanState.START;
                 RunAnimation("Start");
                 break;
+            case HumanState.HUGWALK:
+                _tempState = HumanState.HUGWALK;
+                RunAnimation("HugWalk");
+                break;
             default:
                 break;
         }
@@ -106,8 +115,8 @@ public abstract class Human : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.WalkActon -= WalkStatus;
-        PlayerController.IdleAction -= IdleStatus;
+        //PlayerController.WalkActon -= WalkStatus;
+        //PlayerController.IdleAction -= IdleStatus;
     }
 
     // Update is called once per frame
@@ -140,13 +149,9 @@ public abstract class Human : MonoBehaviour
                 break;
             case HumanState.WALK:
                 HumanState = HumanState.WALK;
-                //if (gameObject.tag=="Cameraman")
-                //{
-                //    //gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.001f);
-                //}
                 break;
             case HumanState.WALKKEEP:
-                HumanState = HumanState.GETAHEAD;
+                HumanState = HumanState.WALK;
                 break;
             case HumanState.GETAHEAD:
                 HumanState = HumanState.GETAHEAD;
@@ -155,14 +160,15 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.HUGHER:
-                if (gameObject.tag=="Male")
-                {
-                    HumanState = HumanState.GETAHEAD;
-                }
-                else
-                {
-                    gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
-                }
+                //var Male = GameManager.Instance.CurrentLevel.PlayerController.MaleObj;
+                //if (Male!=null)
+                //{
+                //    if (Male.tag == "Male")
+                //    {
+                //    }
+
+                //}
+                GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.SLAPYOUR:
                 HumanState = HumanState.GETAHEAD;
@@ -195,14 +201,16 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.HUGHER:
-                if (gameObject.tag=="Male")
-                {
-                    HumanState = HumanState.IDLE;
-                }
-                else
-                {
-                    //gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
-                }
+                //var Male = GameManager.Instance.CurrentLevel.PlayerController.MaleObj;
+                //if (Male != null)
+                //{
+                //    if (Male.tag == "Male")
+                //    {
+                //        HumanState = HumanState.IDLE;
+                //    }
+
+                //}
+                GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.IDLE;
                 TempStateControl();
                 break;
             case HumanState.DRESSUP:
@@ -242,7 +250,8 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.WALKKEEP:
-                HumanState = HumanState.GETAHEAD;
+                //HumanState = HumanState.GETAHEAD;
+                HumanState = HumanState.WALK;
                 break;
             case HumanState.START:
                 HumanState = HumanState.WALK;

@@ -6,6 +6,12 @@ public class Male : Human
 {
     public GameObject MyHips;
     public bool Fake = false;
+
+    private void Awake()
+    {
+        AssigmentComponent();
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         if (!Fake)
@@ -13,7 +19,6 @@ public class Male : Human
             GameManager.GameStartAction += StartStatusSub;
             StartStatus(9.5f, -0.19f, -5f, -90f, "Start", 0.001f);
         }
-        base.AssigmentComponent();
         Finish.FinishAction += FinishStatus;
     }
 

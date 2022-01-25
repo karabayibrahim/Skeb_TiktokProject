@@ -10,6 +10,11 @@ public class Female : Human
 
     private Tween TakeOfTween;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        AssigmentComponent();
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         if (!Fake)
@@ -17,7 +22,6 @@ public class Female : Human
             GameManager.GameStartAction += StartStatusSub;
             StartStatus(9.5f, -0.63f, 0, -90f, "Start", 0.001f);
         }
-        base.AssigmentComponent();
         Finish.FinishAction += FinishStatus;
     }
 

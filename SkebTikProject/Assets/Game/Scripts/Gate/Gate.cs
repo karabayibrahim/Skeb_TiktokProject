@@ -9,17 +9,23 @@ public class Gate : MonoBehaviour, ICollectable
     public GameObject VisableObj;
     public void DoCollect(int Index)
     {
+        CoupleGate.enabled = false;
+        var Player = GameManager.Instance.CurrentLevel.PlayerController;
+        CoupleGate.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
         Trigged = true;
         CoupleGate.Trigged = true;
         ParticleStatus();
         if (gameObject.tag=="Positive")
         {
+            
             StartCoroutine(PositiveTimer(Index));
         }
         else
         {
             StartCoroutine(NegativeTimer(Index));
+            
+            
         }
     }
 
@@ -69,6 +75,7 @@ public class Gate : MonoBehaviour, ICollectable
         player.Female.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStates[_index];
         player.GateIndex++;
         GameManager.GateTriggerAction?.Invoke();
+        player.GateTrigged = false;
     }
 
     private IEnumerator NegativeTimer(int _index)
@@ -80,5 +87,6 @@ public class Gate : MonoBehaviour, ICollectable
         player.Female.HumanState = GameManager.Instance.CurrentLevel.DataHumanState.HumanStatesNegative[_index];
         player.GateIndex++;
         GameManager.GateTriggerAction?.Invoke();
+        player.GateTrigged = false;
     }
 }
