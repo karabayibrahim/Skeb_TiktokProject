@@ -6,7 +6,7 @@ public class Female : Human
 {
     public TShirt Shirt;
     public bool Fake = false;
-
+    public HumanState mysa;
 
     private Tween TakeOfTween;
     // Start is called before the first frame update
@@ -34,21 +34,21 @@ public class Female : Human
     // Update is called once per frame
     void Update()
     {
-        
+        mysa = HumanState;
     }
     public override void AnimPositon()
     {
         switch (HumanState)
         {
             case HumanState.IDLE:
+                transform.DORotate(new Vector3(0, 0, 0), 0.1f);
                 transform.DOLocalMove(new Vector3(-1.5f, 0, 0f), 0.5f);
-                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
                 break;
             case HumanState.WALK:
                 break;
             case HumanState.GETAHEAD:
-                transform.DOLocalMove(new Vector3(1.5f,0,7f),0.5f);
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                transform.DOLocalMove(new Vector3(1.5f,0,7f),0.5f);
                 break;
             case HumanState.TAKEOFF:
                 TakeOfTween=Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0,-0.15f,0.9f),10f);
@@ -57,22 +57,25 @@ public class Female : Human
                 break;
             case HumanState.DRESSUP:
                 TakeOfTween.Kill();
+                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0, -0.18f, -0.4f), 1.8f);
                 transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
-                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.SLAPYOUR:
                 transform.DOLocalMove(new Vector3(1.5f, 0, 5f), 0.5f);
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 break;
             case HumanState.HUGHER:
-                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
                 transform.DORotate(new Vector3(0, 180f, 0), 0.01f);
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
                 //gameObject.transform.SetParent(GameManager.Instance.CurrentLevel.PlayerController.Male.MyHips.transform);
                 break;
             case HumanState.POINTBOY:
                 transform.DOLocalMove(new Vector3(-3f, 0, 0f), 0.5f);
                 transform.DORotate(new Vector3(0, 45f, 0), 0.5f);
+                break;
+            case HumanState.HUGWALK:
+                transform.DOLocalMove(new Vector3(1.5f, 0.78f, 6.2f), 0.5f);
                 break;
             default:
                 break;

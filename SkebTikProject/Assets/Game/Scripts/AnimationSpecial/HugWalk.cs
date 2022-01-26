@@ -7,6 +7,8 @@ public class HugWalk : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGWALK;
+        GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.HUGWALK;
         //GameManager.Instance.CurrentLevel.PlayerController.Female.transform.DOLocalMove(new Vector3(1.7f, 0.78f, 0.76f), 0.01f);
         //GameManager.Instance.CurrentLevel.PlayerController.Female.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.001f);
     }

@@ -7,7 +7,7 @@ using DG.Tweening;
 public abstract class Human : MonoBehaviour
 {
     private HumanState _humanState;
-    private HumanState _tempState;
+    public HumanState _tempState;
     public Animator Anim;
 
     public abstract void AnimPositon();
@@ -19,7 +19,7 @@ public abstract class Human : MonoBehaviour
         }
         set
         {
-            if (HumanState==value)
+            if (HumanState == value)
             {
                 return;
             }
@@ -28,7 +28,7 @@ public abstract class Human : MonoBehaviour
             {
                 OnStateChanged();
             }
-            if (GameManager.Instance.CurrentLevel.PlayerController.Male!=null&& GameManager.Instance.CurrentLevel.PlayerController.Female != null)
+            if (GameManager.Instance.CurrentLevel.PlayerController.Male.gameObject != null && GameManager.Instance.CurrentLevel.PlayerController.Female.gameObject != null)
             {
                 AnimPositon();
             }
@@ -40,9 +40,10 @@ public abstract class Human : MonoBehaviour
         switch (HumanState)
         {
             case HumanState.IDLE:
+                _tempState = HumanState.IDLE;
                 RunAnimation("Idle");
                 var Cameraman = GameManager.Instance.CurrentLevel.PlayerController.Cameraman;
-                if (Cameraman!=null)
+                if (Cameraman != null)
                 {
                     if (Cameraman.gameObject.tag == "Cameraman")
                     {
@@ -57,9 +58,9 @@ public abstract class Human : MonoBehaviour
                         Cameraman.gameObject.GetComponent<Cameraman>().MySpine.transform.DOLocalRotate(new Vector3(0, 90f, 0), 0.001f);
                     }
                 }
-                
                 break;
             case HumanState.WALK:
+                _tempState= HumanState.WALK;
                 RunAnimation("Walk");
                 break;
             case HumanState.GETAHEAD:
@@ -67,6 +68,7 @@ public abstract class Human : MonoBehaviour
                 RunAnimation("GetAhead");
                 break;
             case HumanState.TAKEOFF:
+                _tempState = HumanState.TAKEOFF;
                 RunAnimation("TakeOff");
                 RunAnimation("GetAhead");
                 break;
@@ -107,6 +109,7 @@ public abstract class Human : MonoBehaviour
                 RunAnimation("Walk");
                 break;
             default:
+                RunAnimation("Idle");
                 break;
         }
     }
@@ -132,12 +135,12 @@ public abstract class Human : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void RunAnimation(string _animName)
     {
-        if (Anim!=null)
+        if (Anim != null)
         {
             Anim.CrossFade(_animName, 0.001f);
         }
@@ -154,6 +157,9 @@ public abstract class Human : MonoBehaviour
     {
         switch (HumanState)
         {
+            case HumanState.START:
+                TempStateControl();
+                break;
             case HumanState.IDLE:
                 TempStateControl();
                 break;
@@ -170,14 +176,6 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.HUGHER:
-                //var Male = GameManager.Instance.CurrentLevel.PlayerController.MaleObj;
-                //if (Male!=null)
-                //{
-                //    if (Male.tag == "Male")
-                //    {
-                //    }
-
-                //}
                 GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.SLAPYOUR:
@@ -194,21 +192,35 @@ public abstract class Human : MonoBehaviour
                 //TempStateControl();
                 HumanState = HumanState.POINTGIRL;
                 break;
+            case HumanState.HUGWALK:
+                //GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.WALK;
+                //GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGHER;
+                //TempStateControl();
+                break;
             default:
+                //HumanState = HumanState.WALK;
                 break;
         }
-        
+
     }
     internal void IdleStatus()
     {
         switch (HumanState)
         {
+            case HumanState.START:
+                TempStateControl();
+                break;
             case HumanState.IDLE:
+                //TempStateIdleControl();
+                //TempStateControl();
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.WALK:
                 //TempStateControl();
-                HumanState = HumanState.IDLE;
+                GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.IDLE;
+                GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.IDLE;
+                GameManager.Instance.CurrentLevel.PlayerController.Cameraman.GetComponent<Cameraman>().HumanState = HumanState.IDLE;
+                //HumanState = HumanState.IDLE;
                 break;
             case HumanState.GETAHEAD:
                 HumanState = HumanState.IDLE;
@@ -217,32 +229,31 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.TAKEOFF:
+                //TempStateIdleControl();
                 HumanState = HumanState.IDLE;
+                //GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.IDLE;
                 break;
             case HumanState.HUGHER:
-                //var Male = GameManager.Instance.CurrentLevel.PlayerController.MaleObj;
-                //if (Male != null)
-                //{
-                //    if (Male.tag == "Male")
-                //    {
-                //        HumanState = HumanState.IDLE;
-                //    }
-
-                //}
                 GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.IDLE;
-                TempStateControl();
+                GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGWALK;
                 break;
             case HumanState.DRESSUP:
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.POINTBOY:
+                //TempStateIdleControl();
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.POINTGIRL:
+                //TempStateIdleControl();
                 HumanState = HumanState.IDLE;
                 break;
+            case HumanState.HUGWALK:
+                GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.IDLE;
+                GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.IDLE;
+                //HumanState = HumanState.IDLE;
+                break;
             default:
-                HumanState = HumanState.IDLE;
                 break;
         }
         //HumanState = HumanState.IDLE;
@@ -256,7 +267,8 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.WALK;
                 break;
             case HumanState.WALK:
-                HumanState = HumanState.GETAHEAD;
+                HumanState = HumanState.WALK;
+                //HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.GETAHEAD:
                 HumanState = HumanState.GETAHEAD;
@@ -268,7 +280,7 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.HUGHER:
-                HumanState = HumanState.HUGHER;
+                HumanState = HumanState.HUGWALK;
                 //HumanState = HumanState.GETAHEAD;
                 break;
             case HumanState.DRESSUP:
@@ -289,7 +301,50 @@ public abstract class Human : MonoBehaviour
                 //HumanState = HumanState.POINTGIRL;
                 HumanState = HumanState.WALK;
                 break;
+            case HumanState.HUGWALK:
+                GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGHER;
+                GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.HUGHER;
+                break;
             default:
+                break;
+        }
+    }
+    private void TempStateIdleControl()
+    {
+        switch (_tempState)
+        {
+            case HumanState.START:
+                break;
+            case HumanState.IDLE:
+                break;
+            case HumanState.IDLELEGCAM:
+                break;
+            case HumanState.WALK:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.GETAHEAD:
+                break;
+            case HumanState.SLAPYOUR:
+                break;
+            case HumanState.TAKEOFF:
+                HumanState = HumanState.DRESSUP;
+                break;
+            case HumanState.HUGHER:
+                break;
+            case HumanState.DRESSUP:
+                break;
+            case HumanState.WALKKEEP:
+                break;
+            case HumanState.HUGWALK:
+                break;
+            case HumanState.POINTGIRL:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.POINTBOY:
+                HumanState = HumanState.IDLE;
+                break;
+            default:
+                HumanState = HumanState.IDLE;
                 break;
         }
     }

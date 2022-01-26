@@ -31,29 +31,45 @@ public class VideoPlayerController : MonoBehaviour
 
     private void VideoControlCenter()
     {
-        StartCoroutine(ControlTime());
+        StartCoroutine(ControlTime(1.5f));
     }
 
-    private IEnumerator ControlTime()
+    private IEnumerator ControlTime(float _time)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_time);
         Camera.gameObject.SetActive(true);
         Male.GetComponent<Animator>().CrossFade("Walk", 0.01f);
         Female.GetComponent<Animator>().CrossFade("Walk", 0.01f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_time);
+        if (GameManager.Instance.LevelIndex==1)
+        {
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[0].SetActive(true);
+        }
         Male.HumanState = VideoHumanState[0];
         Female.HumanState = VideoHumanState[0];
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_time);
+        if (GameManager.Instance.LevelIndex == 1)
+        {
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[0].SetActive(false);
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[1].SetActive(true);
+        }
         Male.HumanState = VideoHumanState[1];
         Female.HumanState = VideoHumanState[1];
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_time);
+        if (GameManager.Instance.LevelIndex == 1)
+        {
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[0].SetActive(false);
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[1].SetActive(false);
+            GameManager.Instance.UIManager.PhonePanel.GetComponent<PhonePanel>().Questions[2].SetActive(true);
+        }
         Male.HumanState = VideoHumanState[2];
         Female.HumanState = VideoHumanState[2];
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_time);
         Male.GetComponent<Animator>().enabled = false;
         Female.GetComponent<Animator>().enabled = false;
         ActionBool = false;
         Camera.GetComponent<SecondKamera>().enabled = false;
+        GameManager.GameAllEndAction?.Invoke();
 
     }
 

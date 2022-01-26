@@ -14,7 +14,7 @@ public class PhonePanel : MonoBehaviour
     public Image LikeImage;
     public Image CommentImage;
     public Image ShareImage;
-    public Button RetryButton;
+    public List<GameObject> Questions = new List<GameObject>();
 
     private double LikeCount;
     private double CommentCount;
@@ -24,12 +24,10 @@ public class PhonePanel : MonoBehaviour
     {
         CountAssigment();
         ImagesScaleYoyo();
-        RetryButton.onClick.AddListener(Retry);
     }
 
     private void OnDisable()
     {
-        RetryButton.onClick.RemoveListener(Retry);
     }
 
     // Update is called once per frame
@@ -70,9 +68,5 @@ public class PhonePanel : MonoBehaviour
 
     }
 
-    private void Retry()
-    {
-        //Application.LoadLevel(Application.loadedLevel);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 }

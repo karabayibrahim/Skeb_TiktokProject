@@ -46,20 +46,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.GameState==GameState.PLAY)
         {
-            WalkActon?.Invoke();
+            if (Input.GetMouseButtonDown(0))
+            {
+                WalkActon?.Invoke();
+            }
+            if (Input.GetMouseButton(0))
+            {
+                transform.Translate(0, 0, MoveSpeed * Time.deltaTime);
+                //HorizontalMovement();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                IdleAction?.Invoke();
+            }
+            HorizontalMovement();
         }
-        if (Input.GetMouseButton(0))
-        {
-            transform.Translate(0, 0, MoveSpeed * Time.deltaTime);
-            //HorizontalMovement();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            IdleAction?.Invoke();
-        }
-        HorizontalMovement();
+        
 
     }
 

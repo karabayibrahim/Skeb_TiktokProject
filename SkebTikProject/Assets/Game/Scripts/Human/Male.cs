@@ -6,7 +6,7 @@ public class Male : Human
 {
     public GameObject MyHips;
     public bool Fake = false;
-
+    public HumanState mysa;
     private void Awake()
     {
         AssigmentComponent();
@@ -30,6 +30,7 @@ public class Male : Human
     // Update is called once per frame
     void Update()
     {
+        mysa = HumanState;
     }
 
     public override void AnimPositon()

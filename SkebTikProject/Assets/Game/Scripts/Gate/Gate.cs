@@ -10,7 +10,6 @@ public class Gate : MonoBehaviour, ICollectable
     public void DoCollect(int Index)
     {
         CoupleGate.enabled = false;
-        var Player = GameManager.Instance.CurrentLevel.PlayerController;
         CoupleGate.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
         Trigged = true;
@@ -62,6 +61,7 @@ public class Gate : MonoBehaviour, ICollectable
         newParticle.transform.SetParent(null);
         VisableObj.SetActive(false);
         CoupleGate.VisableObj.SetActive(false);
+        gameObject.GetComponentInParent<GateControl>().QuestionBox.SetActive(false);
         //Destroy(CoupleGate.gameObject);
         //Destroy(gameObject);
     }

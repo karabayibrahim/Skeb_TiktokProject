@@ -16,6 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
     public UIManager UIManager;
     public static Action GateTriggerAction;
     public static Action GameStartAction;
+    public static Action GameAllEndAction;
     // Start is called before the first frame update
 
     public GameState GameState
@@ -55,13 +56,12 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnLevelIndexChanghed()
     {
         PlayerPrefs.SetInt(_playerLevelIndexKey, LevelIndex);
-        Debug.Log("Kayýt"+PlayerPrefs.GetInt(_playerLevelIndexKey));
+        //Debug.Log("Kayýt"+PlayerPrefs.GetInt(_playerLevelIndexKey));
     }
 
     void Awake()
     {
         //PlayerPrefs.DeleteAll();
-        //LevelIndex++;
         LevelIndex = PlayerPrefs.GetInt(_playerLevelIndexKey);
         Debug.Log(LevelIndex);
         GameState = GameState.START;
@@ -69,13 +69,15 @@ public class GameManager : MonoSingleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+       
+    }
+
+    public void GameStartStatus()
+    {
+        if (GameState == GameState.START)
         {
-            if (GameState == GameState.START)
-            {
-                GameStartAction?.Invoke();
-            }
-            GameState = GameState.PLAY;
+            GameStartAction?.Invoke();
         }
+        GameState = GameState.PLAY;
     }
 }
