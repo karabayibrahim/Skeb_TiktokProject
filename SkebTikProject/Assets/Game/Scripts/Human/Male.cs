@@ -9,6 +9,8 @@ public class Male : Human
     public HumanState mysa;
     private void Awake()
     {
+        //_tempState = HumanState.START;
+        //HumanState = HumanState.START;
         AssigmentComponent();
         DontDestroyOnLoad(this);
     }
@@ -21,6 +23,8 @@ public class Male : Human
         }
         Finish.FinishAction += FinishStatus;
     }
+
+ 
 
     private void OnDisable()
     {
@@ -70,6 +74,8 @@ public class Male : Human
     }
     private void FinishStatus()
     {
+        //_tempState = HumanState.IDLE;
+        //HumanState = HumanState.IDLE;
         GetComponent<Animator>().enabled = false;
         //gameObject.SetActive(false);
     }

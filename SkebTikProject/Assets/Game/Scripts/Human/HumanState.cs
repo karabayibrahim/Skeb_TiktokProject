@@ -6,7 +6,6 @@ public enum HumanState
 {
     START,
     IDLE,
-    IDLELEGCAM,
     WALK,
     GETAHEAD,
     SLAPYOUR,
@@ -15,6 +14,10 @@ public enum HumanState
     DRESSUP,
     WALKKEEP,
     HUGWALK,
+    IDLEHUG,
     POINTGIRL,
     POINTBOY,
+    IDLEGETAHEAD,
+    IDLETAKEOFF,
+    IDLESLAP,
 }

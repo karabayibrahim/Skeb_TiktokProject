@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13c8c2c3d6eaa24c9a63cc95c79296e, type: 3}
   m_Name: DataHuman1
   m_EditorClassIdentifier: 
-  HumanStates: 040000000600000007000000
-  HumanStatesNegative: 090000000500000008000000
+  HumanStates: 030000000500000006000000
+  HumanStatesNegative: 080000000400000007000000

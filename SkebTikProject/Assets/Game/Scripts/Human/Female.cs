@@ -12,9 +12,19 @@ public class Female : Human
     // Start is called before the first frame update
     private void Awake()
     {
+        //_tempState = HumanState.START;
+        //HumanState= HumanState.START;
         AssigmentComponent();
         DontDestroyOnLoad(this);
     }
+
+    public void SlapEvent()
+    {
+        GameManager.Instance.CurrentLevel.PlayerController.Male.RunAnimation("SlapYour");
+        GameManager.Instance.CurrentLevel.VideoPlayerController.Male.RunAnimation("SlapYour");
+    }
+
+
     void Start()
     {
         if (!Fake)
@@ -77,6 +87,21 @@ public class Female : Human
             case HumanState.HUGWALK:
                 transform.DOLocalMove(new Vector3(1.5f, 0.78f, 6.2f), 0.5f);
                 break;
+            case HumanState.IDLEGETAHEAD:
+                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
+                break;
+            case HumanState.IDLETAKEOFF:
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
+                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                break;
+            case HumanState.IDLEHUG:
+                transform.DOLocalMove(new Vector3(1.5f, 0.78f, 6.2f), 0.5f);
+                break;
+            case HumanState.IDLESLAP:
+                transform.DOLocalMove(new Vector3(1.5f, 0, 5f), 0.5f);
+                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                break;
             default:
                 break;
         }
@@ -95,7 +120,9 @@ public class Female : Human
 
     private void FinishStatus()
     {
-        GetComponent<Animator>().enabled = false;
+        //_tempState = HumanState.IDLE;
+        //HumanState = HumanState.IDLE;
+        GetComponent<Animator>().enabled = true;
         //gameObject.SetActive(false);
     }
 }

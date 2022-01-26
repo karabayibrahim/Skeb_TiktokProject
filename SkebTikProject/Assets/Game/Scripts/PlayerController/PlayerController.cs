@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Male Male;
     public GameObject MaleObj;
     public GameObject FemaleObj;
+    public GameObject MainPhone;
     public float MoveFactorX => _moveFactorX;
     public float MoveSpeed;
     public float HorizontalSpeed;
