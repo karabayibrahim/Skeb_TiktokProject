@@ -189,6 +189,7 @@ public class Female : Human
                 Shirt.gameObject.SetActive(false);
                 Howel.gameObject.SetActive(true);
                 Short.SetActive(false);
+                Bed.SetActive(false);
                 break;
             case 3:
                 Bed.SetActive(true);

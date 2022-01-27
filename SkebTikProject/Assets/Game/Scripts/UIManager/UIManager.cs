@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.LevelIndex = 0;
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(GameManager.Instance.LevelIndex);
     }
 
     private void GameStartStatus()

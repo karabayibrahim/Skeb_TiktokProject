@@ -183,7 +183,7 @@ public abstract class Human : MonoBehaviour
                 _tempState = HumanState.CLOSETOWEL;
                 _tempIdleState = HumanState.CLOSETOWEL;
                 RunAnimation("CloseTowel");
-                //RunAnimation("Walk");
+                RunAnimation("Walk");
                 break;
             case HumanState.TRIESTO:
                 AvatarChange();
@@ -672,7 +672,6 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.IDLE;
                 break;
             case HumanState.UNROLLTOWEL:
-                HumanState = HumanState.IDLE;
                 HumanState = HumanState.IDLEUNROLLTOWELL;
                 break;
             case HumanState.GETONBED:
