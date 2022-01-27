@@ -4,13 +4,18 @@ using UnityEngine;
 using DG.Tweening;
 public class Female : Human
 {
+    public bool Fake = false;
     public TShirt Shirt;
+    [Header("Level3")]
+
     public Howel Howel;
     public GameObject Short;
-    public GameObject MySpine;
+
+    //public GameObject MySpine;
+    [Header("Level4")]
     public GameObject Bed;
-    public bool Fake = false;
-    public HumanState mysa;
+
+
 
     private Tween TakeOfTween;
     // Start is called before the first frame update
@@ -49,7 +54,6 @@ public class Female : Human
     // Update is called once per frame
     void Update()
     {
-        mysa = HumanState;
     }
     public override void AnimPositon()
     {
@@ -58,7 +62,7 @@ public class Female : Human
             case HumanState.IDLE:
                 transform.DORotate(new Vector3(0, 0, 0), 0.1f);
                 transform.DOLocalMove(new Vector3(-1.5f, 0, 0f), 0.5f);
-                MySpine.transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.5f);
+                //MySpine.transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.5f);
                 break;
             case HumanState.WALK:
                 transform.DOLocalMove(new Vector3(-1.5f, 0, 0f), 0.5f);
@@ -67,7 +71,7 @@ public class Female : Human
             case HumanState.GETAHEAD:
                 transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
                 transform.DOLocalMove(new Vector3(1.5f,0,7f),0.5f);
-                MySpine.transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.5f);
+                //MySpine.transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.5f);
                 break;
             case HumanState.TAKEOFF:
                 TakeOfTween=Shirt.MyMoveObject.transform.DOLocalMove(new Vector3(0,-0.15f,0.9f),10f);
@@ -91,7 +95,7 @@ public class Female : Human
                 break;
             case HumanState.POINTBOY:
                 transform.DOLocalMove(new Vector3(-3f, 0, 0f), 0.5f);
-                MySpine.transform.DOLocalRotate(new Vector3(0, 45f, 0), 0.5f);
+                //MySpine.transform.DOLocalRotate(new Vector3(0, 45f, 0), 0.5f);
                 break;
             case HumanState.HUGWALK:
                 transform.DOLocalMove(new Vector3(1.5f, 0.78f, 6.2f), 0.5f);
@@ -110,7 +114,11 @@ public class Female : Human
                 break;
             case HumanState.IDLETAKEOFF:
                 transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
-                transform.DORotate(new Vector3(0, 180F, 0), 0.01f);
+                transform.DORotate(new Vector3(0, 180f, 0), 0.01f);
+                break;
+            case HumanState.IDLEUNROLLTOWELL:
+                transform.DOLocalMove(new Vector3(1.5f, 0, 7f), 0.5f);
+                transform.DORotate(new Vector3(0, 180f, 0), 0.01f);
                 break;
             case HumanState.IDLEHUG:
                 transform.DOLocalMove(new Vector3(1.5f, 0.78f, 6.2f), 0.5f);
@@ -126,6 +134,7 @@ public class Female : Human
                 Howel.RightChild.transform.DOLocalRotate(new Vector3(0, 0, Howel.RightChildZ), 0.5f);
                 Howel.LeftHip.transform.DOLocalRotate(new Vector3(0, 0, Howel.LeftZ), 0.5f);
                 Howel.LeftChild.transform.DOLocalRotate(new Vector3(0, 0, Howel.LeftChildZ), 0.5f);
+                //RunAnimation("Idle");
                 break;
             case HumanState.ARGUING:
                 transform.DOLocalMove(new Vector3(-3f, 0, 0f), 0.5f);
@@ -136,6 +145,7 @@ public class Female : Human
                 break;
             case HumanState.GETYOURBED:
                 transform.DOLocalMove(new Vector3(-1.5f, 4.6f, 10f), 0.5f);
+                transform.DORotate(new Vector3(0, 45f, 0), 0.01f);
                 break;
             case HumanState.REACHOVER:
                 transform.DOLocalMove(new Vector3(5.5f, 5f, 11f), 0.5f);
@@ -144,6 +154,9 @@ public class Female : Human
             case HumanState.ELBOWYOUR:
                 transform.DOLocalMove(new Vector3(5.5f, 5f, 11f), 0.5f);
                 transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
+                break;
+            case HumanState.CHEATWITH:
+                RunAnimation("Walk");
                 break;
             default:
                 break;
@@ -163,9 +176,8 @@ public class Female : Human
 
     private void FinishStatus()
     {
-        //_tempState = HumanState.IDLE;
-        //HumanState = HumanState.IDLE;
-        GetComponent<Animator>().enabled = true;
+        HumanState = _tempIdleState;
+        GetComponent<Animator>().enabled =false;
         //gameObject.SetActive(false);
     }
 

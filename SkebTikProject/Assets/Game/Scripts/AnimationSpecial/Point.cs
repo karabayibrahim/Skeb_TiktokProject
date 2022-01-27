@@ -19,6 +19,8 @@ public class Point : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.gameObject.GetComponent<Human>().AvatarChange();
+        animator.gameObject.GetComponent<Human>().Anim.CrossFade("Walk", 0.01f);
         if (animator.gameObject.GetComponentInParent<PlayerController>() != null)
         {
             if (animator.gameObject.tag=="Female")

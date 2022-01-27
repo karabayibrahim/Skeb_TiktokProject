@@ -10,8 +10,11 @@ public class VideoPlayerController : MonoBehaviour
     public Female Female;
     public Camera Camera;
     public List<HumanState> VideoHumanState = new List<HumanState>();
+
+    private float TimeIndex;
     void Start()
     {
+        AdjustTime(GameManager.Instance.LevelIndex);
         Finish.FinishAction += FinishStatus;
     }
 
@@ -31,14 +34,22 @@ public class VideoPlayerController : MonoBehaviour
 
     private void VideoControlCenter()
     {
-        StartCoroutine(ControlTime(1.5f));
+        StartCoroutine(ControlTime(TimeIndex));
     }
 
     private IEnumerator ControlTime(float _time)
     {
         yield return new WaitForSeconds(_time);
         Camera.gameObject.SetActive(true);
-        Male.GetComponent<Animator>().CrossFade("Walk", 0.01f);
+        if (GameManager.Instance.LevelIndex==3)
+        {
+            Male.GetComponent<Animator>().CrossFade("BedIdle", 0.01f);
+        }
+        else
+        {
+            Male.GetComponent<Animator>().CrossFade("Walk", 0.01f);
+        }
+
         Female.GetComponent<Animator>().CrossFade("Walk", 0.01f);
         yield return new WaitForSeconds(_time);
         if (GameManager.Instance.LevelIndex==1)
@@ -80,5 +91,18 @@ public class VideoPlayerController : MonoBehaviour
         Female.gameObject.SetActive(true);
         ActionBool = true;
         VideoControlCenter();
+    }
+
+    private void AdjustTime(float _time)
+    {
+        switch (_time)
+        {
+            case 3:
+                TimeIndex = 2.5f;
+                break;
+            default:
+                TimeIndex = 2f;
+                break;
+        }
     }
 }

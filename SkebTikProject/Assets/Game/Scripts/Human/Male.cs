@@ -7,6 +7,9 @@ public class Male : Human
     public GameObject MySpine;
     public bool Fake = false;
     public HumanState mysa;
+
+    [Header("Level4")]
+    public GameObject OtherGirls;
     private void Awake()
     {
         //_tempState = HumanState.START;
@@ -59,7 +62,7 @@ public class Male : Human
                 break;
             case HumanState.POINTGIRL:
                 transform.DOLocalMove(new Vector3(3f, 0, 0f), 0.5f);
-                MySpine.transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
+                //MySpine.transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
                 break;
             case HumanState.TRIESTO:
                 transform.DORotate(new Vector3(0, -90f, 0), 0.5f);
@@ -75,8 +78,16 @@ public class Male : Human
                 //MySpine.transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
                 break;
             case HumanState.BEDIDLE:
-                transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
-                transform.DOLocalRotate(new Vector3(0, -270f, 0), 0.1f);
+                if (OtherGirls.activeSelf==true)
+                {
+                    transform.DOLocalMove(new Vector3(3f, 4.5f, -9.25f), 0.1f);
+                    transform.DOLocalRotate(new Vector3(0, -90f, 0), 0.1f);
+                }
+                else
+                {
+                    transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
+                    transform.DOLocalRotate(new Vector3(0, -90f, 0), 0.1f);
+                }
                 break;
             case HumanState.GETYOURBED:
                 transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
@@ -89,6 +100,10 @@ public class Male : Human
             case HumanState.ELBOWYOUR:
                 transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
                 transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.1f);
+                break;
+            case HumanState.CHEATWITH:
+                transform.DOLocalMove(new Vector3(3f, 4.5f, -9.25f), 0.5f);
+                OtherGirls.SetActive(true);
                 break;
             default:
                 break;
@@ -111,8 +126,7 @@ public class Male : Human
     }
     private void FinishStatus()
     {
-        //_tempState = HumanState.IDLE;
-        //HumanState = HumanState.IDLE;
+        HumanState = _tempIdleState;
         GetComponent<Animator>().enabled = false;
         //gameObject.SetActive(false);
     }

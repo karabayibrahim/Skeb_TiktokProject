@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointOther : StateMachineBehaviour
+public class AvatarChange : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,36 +21,6 @@ public class PointOther : StateMachineBehaviour
     {
         animator.gameObject.GetComponent<Human>().AvatarChange();
         animator.gameObject.GetComponent<Human>().Anim.CrossFade("Walk", 0.01f);
-        if (animator.gameObject.GetComponentInParent<PlayerController>() != null)
-        {
-            if (animator.gameObject.tag == "Female")
-            {
-                var Female = GameManager.Instance.CurrentLevel.PlayerController.Female;
-                Female.HumanState = HumanState.WALK;
-            }
-            else
-            {
-                var Male = GameManager.Instance.CurrentLevel.PlayerController.Male;
-                Male.HumanState = HumanState.WALK;
-            }
-
-            //GameManager.Instance.CurrentLevel.PlayerController.Female.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.0001f);
-        }
-        else
-        {
-
-            if (animator.gameObject.tag == "Female")
-            {
-                var Female = GameManager.Instance.CurrentLevel.VideoPlayerController.Female;
-                Female.HumanState = HumanState.WALK;
-            }
-            else
-            {
-                var Male = GameManager.Instance.CurrentLevel.VideoPlayerController.Male;
-                Male.HumanState = HumanState.WALK;
-            }
-            //GameManager.Instance.CurrentLevel.VideoPlayerController.Female.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.0001f);
-        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
