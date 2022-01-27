@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class Male : Human
 {
-    public GameObject MyHips;
+    public GameObject MySpine;
     public bool Fake = false;
     public HumanState mysa;
     private void Awake()
@@ -12,7 +12,7 @@ public class Male : Human
         //_tempState = HumanState.START;
         //HumanState = HumanState.START;
         AssigmentComponent();
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
     void Start()
     {
@@ -22,6 +22,7 @@ public class Male : Human
             StartStatus(9.5f, -0.19f, -5f, -90f, "Start", 0.001f);
         }
         Finish.FinishAction += FinishStatus;
+        BedControl(GameManager.Instance.LevelIndex);
     }
 
  
@@ -44,8 +45,11 @@ public class Male : Human
             case HumanState.IDLE:
                 transform.DOLocalMove(new Vector3(1.5f, 0, 0f), 0.5f);
                 transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+                MySpine.transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.5f);
                 break;
             case HumanState.WALK:
+                transform.DOLocalMove(new Vector3(1.5f, 0, 0f), 0.5f);
+                transform.DORotate(new Vector3(0, 0, 0), 0.1f);
                 break;
             case HumanState.DRESSUP:
                 transform.DOLocalMoveZ(4, 0.5f);
@@ -55,7 +59,36 @@ public class Male : Human
                 break;
             case HumanState.POINTGIRL:
                 transform.DOLocalMove(new Vector3(3f, 0, 0f), 0.5f);
-                transform.DORotate(new Vector3(0, -45f, 0), 0.5f);
+                MySpine.transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
+                break;
+            case HumanState.TRIESTO:
+                transform.DORotate(new Vector3(0, -90f, 0), 0.5f);
+                break;
+            case HumanState.CLOSETOWEL:
+                transform.DOLocalMove(new Vector3(-1.5f, 0, -2f), 0.5f);
+                break;
+            case HumanState.JUMPON:
+                transform.DOLocalMove(new Vector3(-1.5f, 0, -2f), 0.1f);
+                break;
+            case HumanState.ARGUING:
+                transform.DOLocalMove(new Vector3(3f, 0, 0f), 0.5f);
+                //MySpine.transform.DOLocalRotate(new Vector3(0, -45f, 0), 0.5f);
+                break;
+            case HumanState.BEDIDLE:
+                transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
+                transform.DOLocalRotate(new Vector3(0, -270f, 0), 0.1f);
+                break;
+            case HumanState.GETYOURBED:
+                transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
+                transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.1f);
+                break;
+            case HumanState.REACHOVER:
+                transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
+                transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.1f);
+                break;
+            case HumanState.ELBOWYOUR:
+                transform.DOLocalMove(new Vector3(3f, 4.5f, 13f), 0.1f);
+                transform.DOLocalRotate(new Vector3(0, 0f, 0), 0.1f);
                 break;
             default:
                 break;
@@ -70,6 +103,10 @@ public class Male : Human
 
     private void StartStatusSub()
     {
+        if (GameManager.Instance.LevelIndex==3)
+        {
+            return;
+        }
         StartStatus(1.5f,0,0,0,"Walk",0.5f);
     }
     private void FinishStatus()
@@ -78,6 +115,21 @@ public class Male : Human
         //HumanState = HumanState.IDLE;
         GetComponent<Animator>().enabled = false;
         //gameObject.SetActive(false);
+    }
+
+    private void BedControl(int _index)
+    {
+        switch (_index)
+        {
+            case 3:
+                _tempIdleState= HumanState.BEDIDLE;
+                _tempState= HumanState.BEDIDLE;
+                HumanState = HumanState.BEDIDLE;
+                RunAnimation("BedIdle");
+                break;
+            default:
+                break;
+        }
     }
 
 }

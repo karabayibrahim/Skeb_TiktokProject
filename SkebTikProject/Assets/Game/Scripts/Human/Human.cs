@@ -9,6 +9,8 @@ public abstract class Human : MonoBehaviour
     private HumanState _humanState;
     public HumanState _tempState;
     public HumanState _tempIdleState;
+    public bool IdleBlock = false;
+    public bool WalkBlock = false;
     public Animator Anim;
 
     public abstract void AnimPositon();
@@ -41,6 +43,7 @@ public abstract class Human : MonoBehaviour
         switch (HumanState)
         {
             case HumanState.IDLE:
+                AvatarChange();
                 _tempState = HumanState.IDLE;
                 _tempIdleState = HumanState.IDLE;
                 RunAnimation("Idle");
@@ -62,33 +65,53 @@ public abstract class Human : MonoBehaviour
                 }
                 break;
             case HumanState.WALK:
+                AvatarChange();
                 _tempState = HumanState.WALK;
                 _tempIdleState = HumanState.WALK;
                 RunAnimation("Walk");
                 break;
             case HumanState.GETAHEAD:
+                AvatarChange();
                 _tempState = HumanState.GETAHEAD;
                 _tempIdleState = HumanState.GETAHEAD;
                 RunAnimation("GetAhead");
                 break;
             case HumanState.TAKEOFF:
+                AvatarChange();
                 _tempState = HumanState.TAKEOFF;
                 _tempIdleState = HumanState.TAKEOFF;
                 RunAnimation("TakeOff");
                 RunAnimation("GetAhead");
                 break;
+            case HumanState.UNROLLTOWEL:
+                AvatarChange();
+                _tempState = HumanState.UNROLLTOWEL;
+                _tempIdleState = HumanState.UNROLLTOWEL;
+                if (gameObject.tag=="Female")
+                {
+                    RunAnimation("UnrollTowel");
+                }
+                else
+                {
+                    RunAnimation("TakeOff");
+                }
+                RunAnimation("GetAhead");
+                break;
             case HumanState.DRESSUP:
+                AvatarChange();
                 _tempState = HumanState.DRESSUP;
                 _tempIdleState = HumanState.DRESSUP;
                 RunAnimation("DressUp");
                 RunAnimation("GetAhead");
                 break;
             case HumanState.HUGHER:
+                AvatarChange();
                 _tempState = HumanState.HUGHER;
                 _tempIdleState = HumanState.HUGHER;
                 RunAnimation("HugHer");
                 break;
             case HumanState.SLAPYOUR:
+                AvatarChange();
                 _tempState = HumanState.SLAPYOUR;
                 _tempIdleState = HumanState.SLAPYOUR;
                 if (gameObject.tag=="Female")
@@ -97,34 +120,84 @@ public abstract class Human : MonoBehaviour
                 }
                 RunAnimation("GetAhead");
                 break;
+            case HumanState.PUSHYOUR:
+                AvatarChange();
+                _tempState = HumanState.PUSHYOUR;
+                _tempIdleState = HumanState.PUSHYOUR;
+                if (gameObject.tag == "Female")
+                {
+                    RunAnimation("PushYour");
+                }
+                else
+                {
+                    RunAnimation("SlapYour");
+                }
+                //RunAnimation("Walk");
+                break;
+            case HumanState.ARGUING:
+                _tempState = HumanState.ARGUING;
+                _tempIdleState = HumanState.ARGUING;
+                AvatarChangeTemp();
+                RunAnimation("Arguing");
+                break;
             case HumanState.WALKKEEP:
+                AvatarChange();
                 _tempState = HumanState.WALKKEEP;
                 _tempIdleState = HumanState.WALKKEEP;
                 RunAnimation("Walk");
                 break;
             case HumanState.START:
+                AvatarChange();
                 _tempState = HumanState.START;
                 _tempIdleState = HumanState.WALKKEEP;
                 RunAnimation("Start");
                 break;
             case HumanState.HUGWALK:
+                AvatarChange();
                 _tempState = HumanState.HUGWALK;
                 _tempIdleState = HumanState.HUGWALK;
                 RunAnimation("HugWalk");
                 break;
             case HumanState.POINTBOY:
+                AvatarChangeTemp();
                 _tempState = HumanState.POINTBOY;
                 _tempIdleState = HumanState.POINTBOY;
                 RunAnimation("PointBoy");
                 //RunAnimation("Walk");
                 break;
             case HumanState.POINTGIRL:
+                AvatarChangeTemp();
                 _tempState = HumanState.POINTGIRL;
                 _tempIdleState = HumanState.POINTGIRL;
                 RunAnimation("PointGirl");
-                //RunAnimation("Walk");
+                break;
+            case HumanState.JUMPON:
+                AvatarChange();
+                _tempState = HumanState.JUMPON;
+                _tempIdleState = HumanState.JUMPON;
+                RunAnimation("JumpOn");
+                break;
+            case HumanState.CLOSETOWEL:
+                AvatarChange();
+                _tempState = HumanState.CLOSETOWEL;
+                _tempIdleState = HumanState.CLOSETOWEL;
+                RunAnimation("CloseTowel");
+                RunAnimation("Walk");
+                break;
+            case HumanState.TRIESTO:
+                AvatarChange();
+                _tempState = HumanState.TRIESTO;
+                _tempIdleState = HumanState.TRIESTO;
+                RunAnimation("TriesTo");
+                break;
+            case HumanState.STARTDANCE:
+                AvatarChange();
+                _tempState = HumanState.STARTDANCE;
+                _tempIdleState = HumanState.STARTDANCE;
+                RunAnimation("StartDance");
                 break;
             case HumanState.IDLEHUG:
+                AvatarChange();
                 _tempState = HumanState.IDLEHUG;
                 _tempIdleState = HumanState.IDLEHUG;
                 GameManager.Instance.CurrentLevel.PlayerController.Male.RunAnimation("Idle");
@@ -132,19 +205,54 @@ public abstract class Human : MonoBehaviour
                 //RunAnimation("HugWalk");
                 break;
             case HumanState.IDLEGETAHEAD:
+                AvatarChange();
                 _tempState = HumanState.IDLEGETAHEAD;
                 _tempIdleState = HumanState.IDLEGETAHEAD;
                 RunAnimation("Idle");
                 break;
             case HumanState.IDLETAKEOFF:
+                AvatarChange();
                 _tempState = HumanState.IDLETAKEOFF;
                 _tempIdleState = HumanState.IDLETAKEOFF;
                 RunAnimation("Idle");
                 break;
+            case HumanState.IDLEUNROLLTOWELL:
+                AvatarChange();
+                _tempState = HumanState.IDLEUNROLLTOWELL;
+                _tempIdleState = HumanState.IDLEUNROLLTOWELL;
+                RunAnimation("Idle");
+                break;
             case HumanState.IDLESLAP:
+                AvatarChange();
                 _tempState = HumanState.IDLESLAP;
                 _tempIdleState = HumanState.IDLESLAP;
                 RunAnimation("Idle");
+                break;
+            case HumanState.BEDIDLE:
+                _tempIdleState = HumanState.BEDIDLE;
+                _tempState = HumanState.BEDIDLE;
+                HumanState = HumanState.BEDIDLE;
+                RunAnimation("BedIdle");
+                break;
+            case HumanState.GETONBED:
+                _tempIdleState = HumanState.GETONBED;
+                _tempState = HumanState.GETONBED;
+                RunAnimation("GetOn");
+                break;
+            case HumanState.GETYOURBED:
+                _tempIdleState = HumanState.GETYOURBED;
+                _tempState = HumanState.GETYOURBED;
+                RunAnimation("GetUp");
+                break;
+            case HumanState.REACHOVER:
+                _tempIdleState = HumanState.REACHOVER;
+                _tempState = HumanState.REACHOVER;
+                RunAnimation("ReachOver");
+                break;
+            case HumanState.ELBOWYOUR:
+                _tempIdleState = HumanState.ELBOWYOUR;
+                _tempState = HumanState.ELBOWYOUR;
+                RunAnimation("Elbow");
                 break;
             default:
                 //RunAnimation("Idle");
@@ -179,6 +287,33 @@ public abstract class Human : MonoBehaviour
 
     }
 
+    private void AvatarChangeTemp()
+    {
+        if (gameObject.tag=="Male")
+        {
+            gameObject.GetComponent<Animator>().avatar = GameManager.Instance.MaleTemp;
+            RunAnimation("Walk");
+        }
+        else if (gameObject.tag == "Female")
+        {
+            gameObject.GetComponent<Animator>().avatar = GameManager.Instance.FemaleTemp;
+            RunAnimation("Walk");
+        }
+        
+    }
+
+    private void AvatarChange()
+    {
+        if (gameObject.tag == "Male")
+        {
+            gameObject.GetComponent<Animator>().avatar = GameManager.Instance.MaleAsil;
+        }
+        else if(gameObject.tag == "Female")
+        {
+            gameObject.GetComponent<Animator>().avatar = GameManager.Instance.FemaleAsil;
+        }
+    }
+
     public void RunAnimation(string _animName)
     {
         if (Anim != null)
@@ -194,7 +329,7 @@ public abstract class Human : MonoBehaviour
     internal void WalkStatus()
     {
         //GameManager.Instance.CurrentLevel.PlayerController.Male.Anim.SetLayerWeight(1, 1);
-        if (this!=null)
+        if (this!=null&&!WalkBlock)
         {
             TempStateControl();
         }
@@ -257,11 +392,11 @@ public abstract class Human : MonoBehaviour
     internal void IdleStatus()
     {
         //GameManager.Instance.CurrentLevel.PlayerController.Male.Anim.SetLayerWeight(1,0);
-        if (this!=null)
+        if (this!=null&&!IdleBlock)
         {
             TempStateIdleControl();
         }
-        Debug.Log(_tempState);
+        //Debug.Log(_tempState);
         //switch (HumanState)
         //{
         //    case HumanState.START:
@@ -343,8 +478,17 @@ public abstract class Human : MonoBehaviour
             case HumanState.SLAPYOUR:
                 HumanState = HumanState.WALK;
                 break;
+            case HumanState.JUMPON:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.PUSHYOUR:
+                HumanState = HumanState.WALK;
+                break;
             case HumanState.TAKEOFF:
                 HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.BEDIDLE:
+                HumanState = HumanState.BEDIDLE;
                 break;
             case HumanState.HUGHER:
                 GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.HUGWALK;
@@ -370,7 +514,18 @@ public abstract class Human : MonoBehaviour
                 HumanState = HumanState.WALK;
                 break;
             case HumanState.POINTGIRL:
-                //HumanState = HumanState.POINTGIRL;
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.ARGUING:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.CLOSETOWEL:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.TRIESTO:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.STARTDANCE:
                 HumanState = HumanState.WALK;
                 break;
             case HumanState.HUGWALK:
@@ -383,12 +538,30 @@ public abstract class Human : MonoBehaviour
             case HumanState.IDLETAKEOFF:
                 HumanState = HumanState.GETAHEAD;
                 break;
+            case HumanState.IDLEUNROLLTOWELL:
+                HumanState = HumanState.GETAHEAD;
+                break;
             case HumanState.IDLEHUG:
                 GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGWALK;
                 GameManager.Instance.CurrentLevel.PlayerController.Male.HumanState = HumanState.WALK;
                 break;
             case HumanState.IDLESLAP:
                 HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.UNROLLTOWEL:
+                HumanState = HumanState.GETAHEAD;
+                break;
+            case HumanState.GETONBED:
+                HumanState = HumanState.GETONBED;
+                break;
+            case HumanState.REACHOVER:
+                HumanState = HumanState.REACHOVER;
+                break;
+            case HumanState.GETYOURBED:
+                HumanState = HumanState.WALK;
+                break;
+            case HumanState.ELBOWYOUR:
+                HumanState = HumanState.WALK;
                 break;
             default:
                 break;
@@ -419,6 +592,12 @@ public abstract class Human : MonoBehaviour
             case HumanState.SLAPYOUR:
                 HumanState = HumanState.IDLESLAP;
                 break;
+            case HumanState.PUSHYOUR:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.JUMPON:
+                HumanState = HumanState.IDLE;
+                break;
             case HumanState.TAKEOFF:
                 HumanState = HumanState.IDLETAKEOFF;
                 break;
@@ -427,6 +606,9 @@ public abstract class Human : MonoBehaviour
                 GameManager.Instance.CurrentLevel.PlayerController.Female.HumanState = HumanState.HUGWALK;
                 break;
             case HumanState.DRESSUP:
+                break;
+            case HumanState.BEDIDLE:
+                HumanState = HumanState.BEDIDLE;
                 break;
             case HumanState.WALKKEEP:
                 HumanState = HumanState.IDLE;
@@ -439,7 +621,34 @@ public abstract class Human : MonoBehaviour
             case HumanState.POINTGIRL:
                 HumanState = HumanState.IDLE;
                 break;
+            case HumanState.ARGUING:
+                HumanState = HumanState.IDLE;
+                break;
             case HumanState.POINTBOY:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.CLOSETOWEL:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.TRIESTO:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.STARTDANCE:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.UNROLLTOWEL:
+                HumanState = HumanState.IDLEUNROLLTOWELL;
+                break;
+            case HumanState.GETONBED:
+                HumanState = HumanState.GETONBED;
+                break;
+            case HumanState.REACHOVER:
+                HumanState = HumanState.REACHOVER;
+                break;
+            case HumanState.GETYOURBED:
+                HumanState = HumanState.IDLE;
+                break;
+            case HumanState.ELBOWYOUR:
                 HumanState = HumanState.IDLE;
                 break;
             default:

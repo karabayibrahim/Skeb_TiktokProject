@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject MaleObj;
     public GameObject FemaleObj;
     public GameObject MainPhone;
+    
     public float MoveFactorX => _moveFactorX;
     public float MoveSpeed;
     public float HorizontalSpeed;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                transform.Translate(0, 0, MoveSpeed * Time.deltaTime);
+                VerticalMove();
                 //HorizontalMovement();
             }
             else if (Input.GetMouseButtonUp(0))
@@ -80,6 +81,11 @@ public class PlayerController : MonoBehaviour
             other.GetComponent<ICollectable>().DoCollect(GateIndex);
             other.GetComponent<ICollectable>().DoCollectNotIndex();
         }
+    }
+
+    public void VerticalMove()
+    {
+        transform.Translate(0, 0, MoveSpeed * Time.deltaTime);
     }
 
     private void HorizontalMovement()

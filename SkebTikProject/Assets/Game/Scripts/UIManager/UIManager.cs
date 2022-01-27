@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     private void NextButtonStatus()
     {
         GameManager.Instance.LevelIndex++;
-        if (GameManager.Instance.LevelIndex>1)
+        if (GameManager.Instance.LevelIndex>3)
         {
             GameManager.Instance.LevelIndex = 0;
         }

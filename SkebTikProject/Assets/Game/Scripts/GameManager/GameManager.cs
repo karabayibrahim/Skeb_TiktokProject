@@ -10,6 +10,10 @@ public class GameManager : MonoSingleton<GameManager>
     private int _levelIndex;
     private string _playerLevelIndexKey = "PlayerLevelIndex";
 
+    public Avatar MaleAsil;
+    public Avatar MaleTemp;
+    public Avatar FemaleAsil;
+    public Avatar FemaleTemp;
     public Cameraman Cameraman;
     public DataParticles DataParticles;
     public Level CurrentLevel;

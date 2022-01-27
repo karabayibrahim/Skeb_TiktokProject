@@ -15,6 +15,10 @@ MonoBehaviour:
   DataHumanStates:
   - {fileID: 11400000, guid: 75aabe4ae1b7ddc4aabce3ece857e104, type: 2}
   - {fileID: 11400000, guid: c48b70fb775876543b6c33f327d4e60f, type: 2}
+  - {fileID: 11400000, guid: 073c5553396c5e54f9abcc8737cd84aa, type: 2}
+  - {fileID: 11400000, guid: 6cac5a5d6c3a0294db409ee808c233d8, type: 2}
   DataTextLevels:
   - {fileID: 11400000, guid: 88d938677c788f9418d56184b110c9a8, type: 2}
   - {fileID: 11400000, guid: c6edcdfde25143b4dbb83b66d97d3b09, type: 2}
+  - {fileID: 11400000, guid: ade6acb0c40485442b5865208919e4a2, type: 2}
+  - {fileID: 11400000, guid: b37d0d0b89d3cdf4d96f2e7034ec0e9c, type: 2}

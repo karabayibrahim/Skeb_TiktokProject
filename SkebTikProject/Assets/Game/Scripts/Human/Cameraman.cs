@@ -39,7 +39,7 @@ public class Cameraman : Human
     // Update is called once per frame
     void Update()
     {
-        var LookPoz = new Vector3(GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.x, GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.y, GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.z);
+        var LookPoz = new Vector3(GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.x, transform.position.y, GameManager.Instance.CurrentLevel.PlayerController.Male.transform.position.z);
         //transform.LookAt(GameManager.Instance.CurrentLevel.PlayerController.Male.transform);
         transform.LookAt(LookPoz);
     }
@@ -127,5 +127,6 @@ public class Cameraman : Human
         YoyoT.Kill();
         GetComponent<Animator>().enabled = false;
         FakePhone.gameObject.SetActive(false);
+        this.enabled = false;
     }
 }
