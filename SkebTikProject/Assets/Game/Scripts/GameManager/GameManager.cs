@@ -66,7 +66,7 @@ public class GameManager : MonoSingleton<GameManager>
     void Awake()
     {
         //PlayerPrefs.DeleteAll();
-        LevelIndex = PlayerPrefs.GetInt(_playerLevelIndexKey);
+        LevelIndex = PlayerPrefs.GetInt("LevelIndex")-1;/*PlayerPrefs.GetInt(_playerLevelIndexKey);*/
         Debug.Log(LevelIndex);
         GameState = GameState.START;
     }

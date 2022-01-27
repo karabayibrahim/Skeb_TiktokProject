@@ -84,12 +84,22 @@ public class UIManager : MonoBehaviour
 
     private void NextButtonStatus()
     {
-        GameManager.Instance.LevelIndex++;
-        if (GameManager.Instance.LevelIndex>3)
+        //GameManager.Instance.LevelIndex++;
+        PlayerPrefs.SetInt("LevelIndex", PlayerPrefs.GetInt("LevelIndex")+1);
+        if (PlayerPrefs.GetInt("LevelIndex") > 4)
         {
-            GameManager.Instance.LevelIndex = 0;
+            SceneManager.LoadScene("Level" + Random.Range(2, 4));
         }
-        SceneManager.LoadScene(GameManager.Instance.LevelIndex);
+        else
+        {
+
+            SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("LevelIndex"));
+        }
+        //if (GameManager.Instance.LevelIndex>3)
+        //{
+        //    GameManager.Instance.LevelIndex = Random.Range(0,3);
+        //}
+        //SceneManager.LoadScene(GameManager.Instance.LevelIndex);
     }
 
     private void GameStartStatus()
@@ -97,7 +107,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.GameStartStatus();
         GameStartPanel.SetActive(false);
         GameInPanel.SetActive(true);
-        int levelIndex = GameManager.Instance.LevelIndex + 1;
+        int levelIndex = PlayerPrefs.GetInt("LevelIndex");/*GameManager.Instance.LevelIndex + 1*/;
         LevelText.text = "LEVEL" + " " + levelIndex.ToString();
     }
 

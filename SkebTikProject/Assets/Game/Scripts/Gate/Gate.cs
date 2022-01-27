@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TapticPlugin;
 public class Gate : MonoBehaviour, ICollectable
 {
     public Gate CoupleGate;
@@ -9,6 +10,7 @@ public class Gate : MonoBehaviour, ICollectable
     public GameObject VisableObj;
     public void DoCollect(int Index)
     {
+        TapticManager.Impact(ImpactFeedback.Light);
         CoupleGate.enabled = false;
         CoupleGate.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
