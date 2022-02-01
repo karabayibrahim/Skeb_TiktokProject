@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
 using System;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
     private GameState _gamaState;

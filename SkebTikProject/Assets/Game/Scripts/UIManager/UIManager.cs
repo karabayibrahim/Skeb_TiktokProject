@@ -84,22 +84,19 @@ public class UIManager : MonoBehaviour
 
     private void NextButtonStatus()
     {
-        //GameManager.Instance.LevelIndex++;
+        
         PlayerPrefs.SetInt("LevelIndex", PlayerPrefs.GetInt("LevelIndex")+1);
         if (PlayerPrefs.GetInt("LevelIndex") > 4)
         {
-            SceneManager.LoadScene("Level" + Random.Range(2, 4));
+            PlayerPrefs.SetInt("LevelIndex", Random.Range(1, 4));
+            SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("LevelIndex"));
         }
         else
         {
 
             SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("LevelIndex"));
         }
-        //if (GameManager.Instance.LevelIndex>3)
-        //{
-        //    GameManager.Instance.LevelIndex = Random.Range(0,3);
-        //}
-        //SceneManager.LoadScene(GameManager.Instance.LevelIndex);
+        
     }
 
     private void GameStartStatus()
